@@ -47,7 +47,15 @@ namespace 屏幕工具
             }
         }
 
-
+        /// <summary>
+        /// 百度云文本翻译通用版
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="text"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="termIds"></param>
+        /// <returns></returns>
         public static string TextTranslateBasic(string token, string text, string from, string to, string termIds)
         {
             if (token == null || text == null || from == null || to == null)
@@ -57,6 +65,50 @@ namespace 屏幕工具
             try
             {
                 String authHost = "https://aip.baidubce.com/rpc/2.0/mt/texttrans/v1?access_token=" + token;
+
+                JObject obj = new JObject();
+                obj.Add("q", text);
+                obj.Add("from", from);
+                obj.Add("to", to);
+                obj.Add("termIds", termIds == null ? "" : termIds);
+
+                HttpClient client = new HttpClient();
+                client.BaseAddress = new Uri(authHost);
+                client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));//ACCEPT header
+                HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, authHost);
+                request.Content = new StringContent(obj.ToString(),
+                                                    Encoding.UTF8,
+                                                    "application/json");//CONTENT-TYPE header
+
+                HttpResponseMessage response = client.SendAsync(request).Result;
+                String result = response.Content.ReadAsStringAsync().Result;
+                Console.WriteLine(result);
+                return result;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        /// <summary>
+        /// 百度云文本翻译词典版
+        /// </summary>
+        /// <param name="token"></param>
+        /// <param name="text"></param>
+        /// <param name="from"></param>
+        /// <param name="to"></param>
+        /// <param name="termIds"></param>
+        /// <returns></returns>
+        public static string TextTranslateDictionary(string token, string text, string from, string to, string termIds)
+        {
+            if (token == null || text == null || from == null || to == null)
+            {
+                return null;
+            }
+            try
+            {
+                String authHost = "https://aip.baidubce.com/rpc/2.0/mt/texttrans-with-dict/v1?access_token=" + token;
 
                 JObject obj = new JObject();
                 obj.Add("q", text);

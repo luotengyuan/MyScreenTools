@@ -154,5 +154,17 @@ namespace 屏幕工具.Properties {
                 this["PickColorHotKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int TranslateType {
+            get {
+                return ((int)(this["TranslateType"]));
+            }
+            set {
+                this["TranslateType"] = value;
+            }
+        }
     }
 }

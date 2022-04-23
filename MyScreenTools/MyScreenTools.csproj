@@ -80,10 +80,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BaiduTranslateUtils.cs" />
+    <Compile Include="Bean\DictionaryMeansBean.cs" />
     <Compile Include="Bean\OcrBasicBean.cs" />
     <Compile Include="Bean\Result.cs" />
+    <Compile Include="Bean\Result2.cs" />
+    <Compile Include="Bean\SimpleMeans.cs" />
     <Compile Include="Bean\TextTranslateBasicBean.cs" />
+    <Compile Include="Bean\TextTranslateDictionaryBean.cs" />
     <Compile Include="Bean\TransResultItem.cs" />
+    <Compile Include="Bean\TransResultItem2.cs" />
+    <Compile Include="Bean\WordResult.cs" />
     <Compile Include="Bean\WordsResultItem.cs" />
     <Compile Include="CatchType.cs" />
     <Compile Include="ColorConversionHelper.cs" />

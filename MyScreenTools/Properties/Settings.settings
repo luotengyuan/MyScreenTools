@@ -35,5 +35,8 @@
     <Setting Name="PickColorHotKey" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">67</Value>
     </Setting>
+    <Setting Name="TranslateType" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

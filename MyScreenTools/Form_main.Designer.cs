@@ -49,6 +49,7 @@
             this.btn_ocr_copy = new System.Windows.Forms.Button();
             this.tb_ocr_result = new System.Windows.Forms.TextBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.cb_translate_type = new System.Windows.Forms.ComboBox();
             this.cb_drag_translate = new System.Windows.Forms.CheckBox();
             this.btn_translate = new System.Windows.Forms.Button();
             this.cb_auto_translate = new System.Windows.Forms.CheckBox();
@@ -285,6 +286,7 @@
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox2.Controls.Add(this.cb_translate_type);
             this.groupBox2.Controls.Add(this.cb_drag_translate);
             this.groupBox2.Controls.Add(this.btn_translate);
             this.groupBox2.Controls.Add(this.cb_auto_translate);
@@ -300,6 +302,20 @@
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "翻译";
+            // 
+            // cb_translate_type
+            // 
+            this.cb_translate_type.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cb_translate_type.FormattingEnabled = true;
+            this.cb_translate_type.Items.AddRange(new object[] {
+            "句子翻译",
+            "词典翻译"});
+            this.cb_translate_type.Location = new System.Drawing.Point(709, 19);
+            this.cb_translate_type.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cb_translate_type.Name = "cb_translate_type";
+            this.cb_translate_type.Size = new System.Drawing.Size(121, 23);
+            this.cb_translate_type.TabIndex = 7;
+            this.cb_translate_type.SelectedIndexChanged += new System.EventHandler(this.cb_translate_type_SelectedIndexChanged);
             // 
             // cb_drag_translate
             // 
@@ -479,6 +495,7 @@
         private System.Windows.Forms.Button btn_ocr_copy;
         private System.Windows.Forms.CheckBox cb_drag_translate;
         private System.Windows.Forms.Button btn_color;
+        private System.Windows.Forms.ComboBox cb_translate_type;
 
     }
 }

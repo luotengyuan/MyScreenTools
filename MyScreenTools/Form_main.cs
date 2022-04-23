@@ -16,6 +16,7 @@ using System.Security.Principal;
 using IWshRuntimeLibrary;//需要引入IWshRuntimeLibrary。在添加引用对话框中搜索(COM>>类型库)Windows Script Host Object Model，选择之后添加到Project的引用中。
 using Microsoft.CSharp;//Microsoft.CSharp 否则会提示 缺少编译器要求的成员 Microsoft.CSharp.RuntimeBinder.Binder.Convert
 using System.Threading;
+using System.Text.RegularExpressions;
 
 namespace 屏幕工具
 {
@@ -81,6 +82,13 @@ namespace 屏幕工具
                 cb_translate_to_idx = 0;
             }
             cb_translate_to.SelectedIndex = cb_translate_to_idx;
+
+            int translateType = Properties.Settings.Default.TranslateType;
+            if (translateType < 0 || translateType >= 2)
+            {
+                translateType = 0;
+            }
+            cb_translate_type.SelectedIndex = translateType;
 
         }
 
@@ -541,7 +549,14 @@ namespace 屏幕工具
             string ret = "";
             if (true)
             {
-                ret = TextTranslateBasic(text);
+                if (cb_translate_type.SelectedIndex == 0)
+                {
+                    ret = TextTranslateBasic(text);
+                }
+                else
+                {
+                    ret = TextTranslateDictionary(text);
+                }
             }
             if (ret != null)
             {
@@ -566,7 +581,31 @@ namespace 屏幕工具
             {
                 return null;
             }
-            string retStr = BaiduTranslateUtils.TextTranslateBasic(token, text.Trim(), cb_translate_from.SelectedValue.ToString(), cb_translate_to.SelectedValue.ToString(), "");
+            string from = cb_translate_from.SelectedValue.ToString();
+            if (from.Equals("auto"))
+            {
+                if (HasChinese(text))
+                {
+                    from = "zh";
+                }
+                else
+                {
+                    from = "en";
+                }
+            }
+            string to = cb_translate_to.SelectedValue.ToString();
+            if (to.Equals("auto"))
+            {
+                if (HasChinese(text))
+                {
+                    to = "zh";
+                }
+                else
+                {
+                    to = "en";
+                }
+            }
+            string retStr = BaiduTranslateUtils.TextTranslateBasic(token, text.Trim(), from, to, "");
             if (retStr == null)
             {
                 return null;
@@ -583,6 +622,88 @@ namespace 屏幕工具
                 if (i != bean.Result.TransResult.Count - 1)
                 {
                     sb.Append("\r\n"); 
+                }
+            }
+            return sb.ToString();
+        }
+
+        private string TextTranslateDictionary(string text)
+        {
+            string tokenJsonStr = BaiduTranslateUtils.GetAccessToken();
+            if (tokenJsonStr == null)
+            {
+                return null;
+            }
+            JObject jsonObj = JObject.Parse(tokenJsonStr);
+            if (jsonObj == null)
+            {
+                return null;
+            }
+            string token = jsonObj["access_token"].ToString();
+            if (token == null && "".Equals(token))
+            {
+                return null;
+            }
+            string from = cb_translate_from.SelectedValue.ToString();
+            if (from.Equals("auto"))
+            {
+                if (HasChinese(text))
+                {
+                    from = "zh";
+                }
+                else
+                {
+                    from = "en";
+                }
+            }
+            string to = cb_translate_to.SelectedValue.ToString();
+            if (to.Equals("auto"))
+            {
+                if (HasChinese(text))
+                {
+                    to = "en";
+                }
+                else
+                {
+                    to = "zh";
+                }
+            }
+            string retStr = BaiduTranslateUtils.TextTranslateDictionary(token, text.Trim(), from, to, "");
+            if (retStr == null)
+            {
+                return null;
+            }
+            TextTranslateDictionaryBean bean = JsonConvert.DeserializeObject<TextTranslateDictionaryBean>(retStr);
+            if (bean == null || bean.Result == null || bean.Result.TransResult == null || bean.Result.TransResult.Count <= 0)
+            {
+                return null;
+            }
+            StringBuilder sb = new StringBuilder();
+            for (int i = 0; i < bean.Result.TransResult.Count; i++)
+            {
+                string transResultDict = bean.Result.TransResult[i].Dict;
+                if (transResultDict == null || "".Equals(transResultDict.Trim()))
+                {
+                    sb.Append(bean.Result.TransResult[i].Dst);
+                    continue;
+                }
+                DictionaryMeansBean means = JsonConvert.DeserializeObject<DictionaryMeansBean>(transResultDict);
+                if (means == null || means.WordResult == null || means.WordResult.SimpleMeans == null || means.WordResult.SimpleMeans.WordMeans == null || means.WordResult.SimpleMeans.WordMeans.Count <= 0)
+                {
+                    sb.Append(bean.Result.TransResult[i].Dst);
+                    continue;
+                }
+                for (int j = 0; j < means.WordResult.SimpleMeans.WordMeans.Count; j++)
+                {
+                    sb.Append(means.WordResult.SimpleMeans.WordMeans[j]);
+                    if (j != means.WordResult.SimpleMeans.WordMeans.Count - 1)
+                    {
+                        sb.Append("\r\n");
+                    }
+                }
+                if (i != bean.Result.TransResult.Count - 1)
+                {
+                    sb.Append("\r\n");
                 }
             }
             return sb.ToString();
@@ -618,6 +739,12 @@ namespace 屏幕工具
                 Properties.Settings.Default.TranslateTo = cb_translate_to.SelectedIndex;
                 Properties.Settings.Default.Save();
             }
+        }
+
+        private void cb_translate_type_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.TranslateType = cb_translate_type.SelectedIndex;
+            Properties.Settings.Default.Save();
         }
 
         private void cb_drag_translate_CheckedChanged(object sender, EventArgs e)
@@ -732,5 +859,16 @@ namespace 屏幕工具
                 this.Location = new Point(mLastLocationX, mLastLocationY);
             }
         }
+
+        /// <summary>
+        /// 判断字符串中是否包含中文
+        /// </summary>
+        /// <param name="str">需要判断的字符串</param>
+        /// <returns>判断结果</returns>
+        public bool HasChinese(string str)
+        {
+            return Regex.IsMatch(str, @"[\u4e00-\u9fa5]");
+        }
+
     }
 }
