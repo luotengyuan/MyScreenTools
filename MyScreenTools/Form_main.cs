@@ -218,13 +218,19 @@ namespace 屏幕工具
         //截图状态的判定
         private void ScreenShot(CatchType type)
         {
-            if (type == CatchType.CATCH)
-            {
-                PrScrnHelper.PrScrn();
-                return;
-            }
             if (isScreenShot == false)
             {
+                if (type == CatchType.CATCH)
+                {
+                    isScreenShot = true;
+                    mLastLocationX = this.Location.X;
+                    mLastLocationY = this.Location.Y;
+                    this.Location = new Point(mScreenWidth, mScreenHigth);
+                    PrScrnHelper.PrScrn();
+                    this.Location = new Point(mLastLocationX, mLastLocationY);
+                    isScreenShot = false;
+                    return;
+                }
                 Form_catch form_catch = new Form_catch(type);
                 //注册Catch窗体定义的事件委托
                 form_catch.SetICSEvent += new SetICS(SetisScreenShot);
@@ -598,11 +604,11 @@ namespace 屏幕工具
             {
                 if (HasChinese(text))
                 {
-                    to = "zh";
+                    to = "en";
                 }
                 else
                 {
-                    to = "en";
+                    to = "zh";
                 }
             }
             string retStr = BaiduTranslateUtils.TextTranslateBasic(token, text.Trim(), from, to, "");
