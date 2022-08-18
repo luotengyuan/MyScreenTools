@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace 屏幕工具
 {
-    public abstract class GlobalHook
+    public abstract class GlobalHookDllHelper
     {
         /*
          * 老外写的一个C#钩子类，写的非常好。
@@ -166,7 +166,7 @@ namespace 屏幕工具
 
         #region Constructor
 
-        public GlobalHook()
+        public GlobalHookDllHelper()
         {
             //绑定ApplicationExit事件
             Application.ApplicationExit += new EventHandler(Application_ApplicationExit);
@@ -254,7 +254,7 @@ namespace 屏幕工具
     /// <summary>  
     /// 键盘钩子类
     /// </summary>  
-    public class KeyboardHook : GlobalHook
+    public class KeyboardHook : GlobalHookDllHelper
     {
 
         #region Events
@@ -385,7 +385,7 @@ namespace 屏幕工具
     /// <summary>  
     /// 鼠标钩子类
     /// </summary>  
-    public class MouseHook : GlobalHook
+    public class MouseHook : GlobalHookDllHelper
     {
 
         #region MouseEventType Enum

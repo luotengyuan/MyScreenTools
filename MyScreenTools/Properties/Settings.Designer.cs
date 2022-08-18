@@ -61,7 +61,7 @@ namespace 屏幕工具.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("88")]
+        [global::System.Configuration.DefaultSettingValueAttribute("86")]
         public int OcrBasicHotKey {
             get {
                 return ((int)(this["OcrBasicHotKey"]));
@@ -164,6 +164,42 @@ namespace 屏幕工具.Properties {
             }
             set {
                 this["TranslateType"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AutoStart {
+            get {
+                return ((bool)(this["AutoStart"]));
+            }
+            set {
+                this["AutoStart"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("88")]
+        public int PasteHotKey {
+            get {
+                return ((int)(this["PasteHotKey"]));
+            }
+            set {
+                this["PasteHotKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("66")]
+        public int OcrExcelHotKey {
+            get {
+                return ((int)(this["OcrExcelHotKey"]));
+            }
+            set {
+                this["OcrExcelHotKey"] = value;
             }
         }
     }

@@ -60,9 +60,9 @@
             this.lb_author.AutoSize = true;
             this.lb_author.Location = new System.Drawing.Point(247, 44);
             this.lb_author.Name = "lb_author";
-            this.lb_author.Size = new System.Drawing.Size(29, 12);
+            this.lb_author.Size = new System.Drawing.Size(131, 12);
             this.lb_author.TabIndex = 10;
-            this.lb_author.Text = "Lois";
+            this.lb_author.Text = "Lois（QQ：234808404）";
             // 
             // label4
             // 

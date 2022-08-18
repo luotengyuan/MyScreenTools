@@ -62,6 +62,9 @@
     <Reference Include="AipSdk">
       <HintPath>Libs\AipSdk.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Libs\Newtonsoft.Json.dll</HintPath>
@@ -79,9 +82,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BaiduTranslateUtils.cs" />
+    <Compile Include="Enums\BaiduYunType.cs" />
+    <Compile Include="Utils\BaiduTranslateUtils.cs" />
     <Compile Include="Bean\DictionaryMeansBean.cs" />
     <Compile Include="Bean\OcrBasicBean.cs" />
+    <Compile Include="Bean\OcrExcelBean.cs" />
     <Compile Include="Bean\Result.cs" />
     <Compile Include="Bean\Result2.cs" />
     <Compile Include="Bean\SimpleMeans.cs" />
@@ -91,69 +96,77 @@
     <Compile Include="Bean\TransResultItem2.cs" />
     <Compile Include="Bean\WordResult.cs" />
     <Compile Include="Bean\WordsResultItem.cs" />
-    <Compile Include="CatchType.cs" />
-    <Compile Include="ColorConversionHelper.cs" />
-    <Compile Include="DeviceCap.cs" />
-    <Compile Include="ForegroundWindow.cs" />
-    <Compile Include="Form_about.cs">
+    <Compile Include="Enums\CatchType.cs" />
+    <Compile Include="Utils\ColorConversionUtils.cs" />
+    <Compile Include="Enums\DeviceCap.cs" />
+    <Compile Include="LibHelper\ForegroundWindow.cs" />
+    <Compile Include="UI\Form_about.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_about.Designer.cs">
+    <Compile Include="UI\Form_about.Designer.cs">
       <DependentUpon>Form_about.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_baiduyun.cs">
+    <Compile Include="UI\Form_baiduyun.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_baiduyun.Designer.cs">
+    <Compile Include="UI\Form_baiduyun.Designer.cs">
       <DependentUpon>Form_baiduyun.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_catch.cs">
+    <Compile Include="UI\Form_catch.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_catch.Designer.cs">
+    <Compile Include="UI\Form_catch.Designer.cs">
       <DependentUpon>Form_catch.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_color.cs">
+    <Compile Include="UI\Form_color.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_color.Designer.cs">
+    <Compile Include="UI\Form_color.Designer.cs">
       <DependentUpon>Form_color.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_main.cs">
+    <Compile Include="UI\Form_main.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_main.Designer.cs">
+    <Compile Include="UI\Form_main.Designer.cs">
       <DependentUpon>Form_main.cs</DependentUpon>
     </Compile>
-    <Compile Include="Form_shortcut.cs">
+    <Compile Include="UI\Form_paste.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form_shortcut.Designer.cs">
+    <Compile Include="UI\Form_paste.Designer.cs">
+      <DependentUpon>Form_paste.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\Form_shortcut.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="UI\Form_shortcut.Designer.cs">
       <DependentUpon>Form_shortcut.cs</DependentUpon>
     </Compile>
-    <Compile Include="GlobalHook.cs" />
-    <Compile Include="HotKey.cs" />
+    <Compile Include="LibHelper\GlobalHookDllHelper.cs" />
+    <Compile Include="LibHelper\HotKeyDllHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="PrScrnHelper.cs" />
-    <Compile Include="ShortcutCreator.cs" />
-    <Compile Include="System32.cs" />
-    <EmbeddedResource Include="Form_about.resx">
+    <Compile Include="LibHelper\PrScrnDllHelper.cs" />
+    <Compile Include="LibHelper\System32DllHelper.cs" />
+    <EmbeddedResource Include="UI\Form_about.resx">
       <DependentUpon>Form_about.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_baiduyun.resx">
+    <EmbeddedResource Include="UI\Form_baiduyun.resx">
       <DependentUpon>Form_baiduyun.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_catch.resx">
+    <EmbeddedResource Include="UI\Form_catch.resx">
       <DependentUpon>Form_catch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_color.resx">
+    <EmbeddedResource Include="UI\Form_color.resx">
       <DependentUpon>Form_color.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_main.resx">
+    <EmbeddedResource Include="UI\Form_main.resx">
       <DependentUpon>Form_main.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Form_shortcut.resx">
+    <EmbeddedResource Include="UI\Form_paste.resx">
+      <DependentUpon>Form_paste.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\Form_shortcut.resx">
       <DependentUpon>Form_shortcut.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -190,6 +203,9 @@
     <Content Include="Readme.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Resources\选择框-未选.png" />
+    <None Include="Resources\选择框_选中.png" />
+    <None Include="Resources\设置.png" />
     <None Include="Resources\下载.png" />
     <None Include="Resources\确认.png" />
     <None Include="Resources\取消 .png" />

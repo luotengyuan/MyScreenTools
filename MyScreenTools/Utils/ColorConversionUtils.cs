@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace 屏幕工具
 {
-    class ColorConversionHelper
+    class ColorConversionUtils
     {
 
         public static void RGB2HSB(int red, int green, int blue, out double hue, out double sat, out double bri)

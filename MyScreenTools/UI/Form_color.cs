@@ -120,16 +120,16 @@ namespace 屏幕工具
             this.tb_hex.Text = String.Format("{0:X2}{1:X2}{2:X2}", v_Red, v_Green, v_Blue);
             this.pb_color.BackColor = Color.FromArgb((int)v_Red, (int)v_Green, (int)v_Blue);
             double hue, sat, bri;
-            ColorConversionHelper.RGB2HSB((int)v_Red, (int)v_Green, (int)v_Blue, out hue, out sat, out bri);
+            ColorConversionUtils.RGB2HSB((int)v_Red, (int)v_Green, (int)v_Blue, out hue, out sat, out bri);
             this.tb_hsb.Text = ((int)hue).ToString("d") + "," + ((int)(sat * 255)).ToString("d") + "," + ((int)(bri * 255)).ToString("d");
             double h1, s1, l1;
-            ColorConversionHelper.RGB2HSL((int)v_Red, (int)v_Green, (int)v_Blue, out h1, out s1, out l1);
+            ColorConversionUtils.RGB2HSL((int)v_Red, (int)v_Green, (int)v_Blue, out h1, out s1, out l1);
             this.tb_hsl.Text = ((int)h1).ToString("d") + "," + ((int)(s1 * 255)).ToString("d") + "," + ((int)(l1 * 255)).ToString("d");
             double h2, s2, v2;
-            ColorConversionHelper.RGB2HSV((int)v_Red, (int)v_Green, (int)v_Blue, out h2, out s2, out v2);
+            ColorConversionUtils.RGB2HSV((int)v_Red, (int)v_Green, (int)v_Blue, out h2, out s2, out v2);
             this.tb_hsv.Text = ((int)h2).ToString("d") + "," + ((int)(s2 * 255)).ToString("d") + "," + ((int)(v2 * 255)).ToString("d");
             double c, m, y, k;
-            ColorConversionHelper.RGB2CMYK((int)v_Red, (int)v_Green, (int)v_Blue, out c, out m, out y, out k);
+            ColorConversionUtils.RGB2CMYK((int)v_Red, (int)v_Green, (int)v_Blue, out c, out m, out y, out k);
             this.tb_cmyk.Text = ((int)(c * 100)).ToString("d") + "," + ((int)(m * 100)).ToString("d") + "," + ((int)(y * 100)).ToString("d") + "," + ((int)(k * 100)).ToString("d");
             //WinInfo.ReleaseDC(v_hwnd, v_DC);
         }

@@ -12,7 +12,7 @@
       <Value Profile="(Default)">90</Value>
     </Setting>
     <Setting Name="OcrBasicHotKey" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">88</Value>
+      <Value Profile="(Default)">86</Value>
     </Setting>
     <Setting Name="TranslateFrom" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -37,6 +37,15 @@
     </Setting>
     <Setting Name="TranslateType" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="AutoStart" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="PasteHotKey" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">88</Value>
+    </Setting>
+    <Setting Name="OcrExcelHotKey" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">66</Value>
     </Setting>
   </Settings>
 </SettingsFile>
