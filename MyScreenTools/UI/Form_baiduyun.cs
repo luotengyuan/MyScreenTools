@@ -86,7 +86,7 @@ namespace 屏幕工具
 
         private void ll_baiduyun_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://blog.csdn.net/loutengyuan/article/details/126402566");
+            Process.Start("https://www.jianshu.com/p/944a0b2c13bc");
         }
     }
 }
