@@ -1,25 +1,28 @@
-# MyScreenTools
+#背景
+你是不是每次要截图而需要打开微信或者QQ截图而感到麻烦，你是不是经常被类似某度文库不能复制文字而感到不爽，你是不是在需要获取屏幕上某个颜色而导出找工具~~~
+最近在遇到以上需求时寻找很久还是未能找到合适的方便的工具，于是自己动手写了一个Windows屏幕工具，包括：屏幕截图、贴图、屏幕取色、截图文字、表格识别（需要申请百度OCR服务）、截图翻译、划词翻译（需要申请百度翻译服务）等功能。并将源码开源，和提供安装程序，希望能够帮助有相同困扰的朋友。
+代码地址：https://github.com/luotengyuan/MyScreenTools
+安装程序：https://download.csdn.net/download/loutengyuan/85952364
 
-Windows屏幕工具，保护功能： 1、截图+快捷键截图； 2、文字识别+快捷键文字识别； 3、屏幕颜色提取+快捷键屏幕颜色提取； 4、翻译+划词翻译；
+#功能介绍
+##主界面
+![image.png](https://upload-images.jianshu.io/upload_images/24810206-33a22979969fc0db.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 主界面
+##开机启动设置
+设置完开机启动后就不用每次手动打开，每次需要截图或文字识别等功能就可以直接使用。
+![image.png](https://upload-images.jianshu.io/upload_images/24810206-fa8ce2f607027547.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-![Untitled](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/151d5dbf-d9c8-4da0-980e-51bc2dd23cc0/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220616%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220616T143523Z&X-Amz-Expires=86400&X-Amz-Signature=8d25212bcfc2bf721172ef119e880a088889719c5aabb0a207c6c5341f29c5b8&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
+##快捷键设置
+可通过快捷键设置对截图、贴图、屏幕取色、文字识别、表格识别等功能进行快捷调用。
+![image.png](https://upload-images.jianshu.io/upload_images/24810206-8e82124d52e0def6.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-### 百度云设置
+##百度云信息设置
+文字识别和翻译是调用的百度云平台的接口，所以想使用这些功能的需要到百度云开放平台注册对于的Key，并设置到软件中才能正常使用。如何申请服务请参照这篇文章：https://luotengyuan.notion.site/OCR-APIKey-SecretKey-a4ae1949601f44d1a5ef67065f56eb11
+![image.png](https://upload-images.jianshu.io/upload_images/24810206-96c755e01bd0ca7c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
-使用文字识别和翻译之前请先设置个人的百度识别和翻译信息
-
-![Untitled](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/43ca01e6-773f-4901-89ce-67c4bd633ee4/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220616%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220616T143555Z&X-Amz-Expires=86400&X-Amz-Signature=f768a68ef682ffa35b29331bbf066c1a2ebe145ff3e1b9eda3c51d5e09f829e9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
-
-### 快捷键设置
-
-![Untitled](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/c792c2cd-d70b-4b69-b198-6e7d0036f0fe/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220616%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220616T143614Z&X-Amz-Expires=86400&X-Amz-Signature=dffaaab2f2bb69793d4390a63d51617a11d59640e76180ed9355d846d0b82c43&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
-
-### 屏幕取色器
-
-![Untitled](https://s3.us-west-2.amazonaws.com/secure.notion-static.com/f3c0010d-aad7-48f4-9f91-5b482ab30a70/Untitled.png?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Content-Sha256=UNSIGNED-PAYLOAD&X-Amz-Credential=AKIAT73L2G45EIPT3X45%2F20220616%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Date=20220616T143643Z&X-Amz-Expires=86400&X-Amz-Signature=70b07c14ddd301758c39377138c683fcae6715435a6ddca238733b4607abf1c9&X-Amz-SignedHeaders=host&response-content-disposition=filename%20%3D%22Untitled.png%22&x-id=GetObject)
-
+##屏幕取色器
+屏幕取色器提取某个像素点的RGB、HSB、HSL、HSV、CMYK等颜色值。
+![image.png](https://upload-images.jianshu.io/upload_images/24810206-8b5f5ec646b84b8f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
 
 
 
