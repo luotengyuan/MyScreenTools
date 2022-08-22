@@ -86,7 +86,7 @@ namespace 屏幕工具
 
         private void ll_baiduyun_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
-            Process.Start("https://www.jianshu.com/p/944a0b2c13bc");
+            Process.Start("https://luotengyuan.notion.site/OCR-APIKey-SecretKey-a4ae1949601f44d1a5ef67065f56eb11");
         }
     }
 }

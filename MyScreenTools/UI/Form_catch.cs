@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -51,11 +52,19 @@ namespace 屏幕工具
         // 截图类型
         private CatchType mCatchType;
         // 默认的图片保持路径
-        public string catchPicture = System.IO.Directory.GetCurrentDirectory() + "\\catch.jpg";
+        public string catchPicture = System.AppDomain.CurrentDomain.BaseDirectory + "\\catch.jpg";
         public Form_catch(CatchType type)
         {
             InitializeComponent();
             mCatchType = type;
+            //MessageBox.Show("" + System.IO.Directory.GetCurrentDirectory()
+            //    + "\n" + System.AppDomain.CurrentDomain.BaseDirectory
+            //    + "\n" + System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName
+            //    + "\n" + System.Environment.CurrentDirectory
+            //    + "\n" + System.IO.Directory.GetCurrentDirectory()
+            //    + "\n" + System.AppDomain.CurrentDomain.SetupInformation.ApplicationBase
+            //    + "\n" + System.Windows.Forms.Application.StartupPath
+            //    + "\n" + System.Windows.Forms.Application.ExecutablePath);
         }
 
         //将当前屏幕截图，显示到全屏无标题栏窗体上
@@ -380,42 +389,61 @@ namespace 屏幕工具
                 }
             }
         }
+        private static ImageCodecInfo GetImageCodecInfo(ImageFormat imageFormat)
+        {
+            ImageCodecInfo[] imageCodecInfoArr = ImageCodecInfo.GetImageDecoders();
+            foreach (ImageCodecInfo imageCodecInfo in imageCodecInfoArr)
+            {
+                if (imageCodecInfo.FormatID == imageFormat.Guid)
+                {
+                    return imageCodecInfo;
+                }
+            }
+            return null;
+        }
 
         //储存图片
         private void SaveFile(Bitmap bmp, bool isDefaultFile)
         {
-            if (isDefaultFile)
+            try
             {
-                bmp.Save(catchPicture, System.Drawing.Imaging.ImageFormat.Jpeg);
-            }
-            else
-            {
-                //用当前时间作为文件名
-                string time = DateTime.Now.ToString();
-                //去除时间中的非法字符
-                string filename = null;
-                foreach (char symbol in time)
+                if (isDefaultFile)
                 {
-                    if (symbol != '/' && symbol != ':' && symbol != ' ')
-                        filename += symbol;
+                    bmp.Save(catchPicture, System.Drawing.Imaging.ImageFormat.Jpeg);
                 }
-                saveFileDialog1.FileName = "截图" + filename;
-                if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                else
                 {
-                    //存储为jpeg或者png格式
-                    switch (saveFileDialog1.FilterIndex)
+                    //用当前时间作为文件名
+                    string time = DateTime.Now.ToString();
+                    //去除时间中的非法字符
+                    string filename = null;
+                    foreach (char symbol in time)
                     {
-                        case 0:
-                            bmp.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
-                            break;
-                        case 1:
-                            bmp.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-                            break;
-                        default:
-                            bmp.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
-                            break;
+                        if (symbol != '/' && symbol != ':' && symbol != ' ')
+                            filename += symbol;
+                    }
+                    saveFileDialog1.FileName = "截图" + filename;
+                    if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+                    {
+                        //存储为jpeg或者png格式
+                        switch (saveFileDialog1.FilterIndex)
+                        {
+                            case 0:
+                                bmp.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Png);
+                                break;
+                            case 1:
+                                bmp.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                break;
+                            default:
+                                bmp.Save(saveFileDialog1.FileName, System.Drawing.Imaging.ImageFormat.Jpeg);
+                                break;
+                        }
                     }
                 }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("请把程序安装在C盘以外的位置");
             }
         }
 
