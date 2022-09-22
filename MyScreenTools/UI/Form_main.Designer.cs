@@ -34,29 +34,21 @@
             this.文件ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.图片文字识别ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.文字识别ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.表格识别ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.百度云设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.文字识别服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.机器翻译服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.快捷键设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.关于ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于我们ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.btn_ocr_excel = new System.Windows.Forms.Button();
-            this.btn_screen_paste = new System.Windows.Forms.Button();
-            this.btn_color = new System.Windows.Forms.Button();
             this.btn_ocr_basic = new System.Windows.Forms.Button();
-            this.btn_screenshot = new System.Windows.Forms.Button();
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btn_ocr_copy_to_excel = new System.Windows.Forms.Button();
+            this.tb_ocr_result = new System.Windows.Forms.TextBox();
             this.btn_ocr_clean = new System.Windows.Forms.Button();
             this.btn_ocr_copy = new System.Windows.Forms.Button();
-            this.tabControl = new System.Windows.Forms.TabControl();
-            this.tab_page_word = new System.Windows.Forms.TabPage();
-            this.tb_ocr_result = new System.Windows.Forms.TextBox();
-            this.tab_page_form = new System.Windows.Forms.TabPage();
-            this.dataGridView = new System.Windows.Forms.DataGridView();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.cb_translate_type = new System.Windows.Forms.ComboBox();
             this.cb_drag_translate = new System.Windows.Forms.CheckBox();
@@ -68,15 +60,9 @@
             this.tb_translate_result = new System.Windows.Forms.TextBox();
             this.contextMenuStrip_notify = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.显示ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.截图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.贴图ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.屏幕取色ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.文字识别ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.表格识别ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.文字识别服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.机器翻译服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip_main.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -84,10 +70,6 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.tabControl.SuspendLayout();
-            this.tab_page_word.SuspendLayout();
-            this.tab_page_form.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).BeginInit();
             this.groupBox2.SuspendLayout();
             this.contextMenuStrip_notify.SuspendLayout();
             this.SuspendLayout();
@@ -117,28 +99,19 @@
             // 图片文字识别ToolStripMenuItem
             // 
             this.图片文字识别ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.文字识别ToolStripMenuItem,
-            this.表格识别ToolStripMenuItem1});
+            this.文字识别ToolStripMenuItem});
             this.图片文字识别ToolStripMenuItem.Image = global::屏幕工具.Properties.Resources.打开;
             this.图片文字识别ToolStripMenuItem.Name = "图片文字识别ToolStripMenuItem";
-            this.图片文字识别ToolStripMenuItem.Size = new System.Drawing.Size(100, 22);
+            this.图片文字识别ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.图片文字识别ToolStripMenuItem.Text = "打开";
             // 
             // 文字识别ToolStripMenuItem
             // 
             this.文字识别ToolStripMenuItem.Image = global::屏幕工具.Properties.Resources.ocr_128;
             this.文字识别ToolStripMenuItem.Name = "文字识别ToolStripMenuItem";
-            this.文字识别ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.文字识别ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.文字识别ToolStripMenuItem.Text = "文字识别";
             this.文字识别ToolStripMenuItem.Click += new System.EventHandler(this.文字识别ToolStripMenuItem_Click);
-            // 
-            // 表格识别ToolStripMenuItem1
-            // 
-            this.表格识别ToolStripMenuItem1.Image = global::屏幕工具.Properties.Resources.ocr_48;
-            this.表格识别ToolStripMenuItem1.Name = "表格识别ToolStripMenuItem1";
-            this.表格识别ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
-            this.表格识别ToolStripMenuItem1.Text = "表格识别";
-            this.表格识别ToolStripMenuItem1.Click += new System.EventHandler(this.表格识别ToolStripMenuItem1_Click);
             // 
             // 关于ToolStripMenuItem
             // 
@@ -168,6 +141,20 @@
             this.百度云设置ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.百度云设置ToolStripMenuItem.Text = "百度云设置";
             // 
+            // 文字识别服务ToolStripMenuItem
+            // 
+            this.文字识别服务ToolStripMenuItem.Name = "文字识别服务ToolStripMenuItem";
+            this.文字识别服务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.文字识别服务ToolStripMenuItem.Text = "文字识别服务";
+            this.文字识别服务ToolStripMenuItem.Click += new System.EventHandler(this.文字识别服务ToolStripMenuItem_Click);
+            // 
+            // 机器翻译服务ToolStripMenuItem
+            // 
+            this.机器翻译服务ToolStripMenuItem.Name = "机器翻译服务ToolStripMenuItem";
+            this.机器翻译服务ToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.机器翻译服务ToolStripMenuItem.Text = "机器翻译服务";
+            this.机器翻译服务ToolStripMenuItem.Click += new System.EventHandler(this.机器翻译服务ToolStripMenuItem_Click);
+            // 
             // 快捷键设置ToolStripMenuItem
             // 
             this.快捷键设置ToolStripMenuItem.Image = global::屏幕工具.Properties.Resources.快捷键;
@@ -188,7 +175,7 @@
             // 
             this.关于我们ToolStripMenuItem.Image = global::屏幕工具.Properties.Resources.关于软件;
             this.关于我们ToolStripMenuItem.Name = "关于我们ToolStripMenuItem";
-            this.关于我们ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+            this.关于我们ToolStripMenuItem.Size = new System.Drawing.Size(156, 26);
             this.关于我们ToolStripMenuItem.Text = "关于我们";
             this.关于我们ToolStripMenuItem.Click += new System.EventHandler(this.关于我们ToolStripMenuItem_Click);
             // 
@@ -196,11 +183,7 @@
             // 
             this.groupBox3.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox3.Controls.Add(this.btn_ocr_excel);
-            this.groupBox3.Controls.Add(this.btn_screen_paste);
-            this.groupBox3.Controls.Add(this.btn_color);
             this.groupBox3.Controls.Add(this.btn_ocr_basic);
-            this.groupBox3.Controls.Add(this.btn_screenshot);
             this.groupBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.groupBox3.Location = new System.Drawing.Point(738, 27);
             this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
@@ -211,46 +194,10 @@
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "操作";
             // 
-            // btn_ocr_excel
-            // 
-            this.btn_ocr_excel.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_ocr_excel.Location = new System.Drawing.Point(4, 143);
-            this.btn_ocr_excel.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_ocr_excel.Name = "btn_ocr_excel";
-            this.btn_ocr_excel.Size = new System.Drawing.Size(86, 27);
-            this.btn_ocr_excel.TabIndex = 4;
-            this.btn_ocr_excel.Text = "表格识别";
-            this.btn_ocr_excel.UseVisualStyleBackColor = false;
-            this.btn_ocr_excel.Click += new System.EventHandler(this.btn_ocr_excel_Click);
-            // 
-            // btn_screen_paste
-            // 
-            this.btn_screen_paste.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_screen_paste.Location = new System.Drawing.Point(4, 50);
-            this.btn_screen_paste.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_screen_paste.Name = "btn_screen_paste";
-            this.btn_screen_paste.Size = new System.Drawing.Size(86, 27);
-            this.btn_screen_paste.TabIndex = 3;
-            this.btn_screen_paste.Text = "贴图";
-            this.btn_screen_paste.UseVisualStyleBackColor = false;
-            this.btn_screen_paste.Click += new System.EventHandler(this.btn_screen_paste_Click);
-            // 
-            // btn_color
-            // 
-            this.btn_color.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_color.Location = new System.Drawing.Point(4, 81);
-            this.btn_color.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_color.Name = "btn_color";
-            this.btn_color.Size = new System.Drawing.Size(86, 27);
-            this.btn_color.TabIndex = 2;
-            this.btn_color.Text = "屏幕取色";
-            this.btn_color.UseVisualStyleBackColor = false;
-            this.btn_color.Click += new System.EventHandler(this.btn_color_Click);
-            // 
             // btn_ocr_basic
             // 
             this.btn_ocr_basic.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_ocr_basic.Location = new System.Drawing.Point(4, 112);
+            this.btn_ocr_basic.Location = new System.Drawing.Point(4, 18);
             this.btn_ocr_basic.Margin = new System.Windows.Forms.Padding(2);
             this.btn_ocr_basic.Name = "btn_ocr_basic";
             this.btn_ocr_basic.Size = new System.Drawing.Size(86, 27);
@@ -258,18 +205,6 @@
             this.btn_ocr_basic.Text = "文字识别";
             this.btn_ocr_basic.UseVisualStyleBackColor = false;
             this.btn_ocr_basic.Click += new System.EventHandler(this.btn_ocr_basic_Click);
-            // 
-            // btn_screenshot
-            // 
-            this.btn_screenshot.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_screenshot.Location = new System.Drawing.Point(4, 19);
-            this.btn_screenshot.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_screenshot.Name = "btn_screenshot";
-            this.btn_screenshot.Size = new System.Drawing.Size(86, 27);
-            this.btn_screenshot.TabIndex = 0;
-            this.btn_screenshot.Text = "截图";
-            this.btn_screenshot.UseVisualStyleBackColor = false;
-            this.btn_screenshot.Click += new System.EventHandler(this.btn_screenshot_Click);
             // 
             // splitContainer1
             // 
@@ -299,10 +234,9 @@
             this.groupBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.groupBox1.Controls.Add(this.btn_ocr_copy_to_excel);
+            this.groupBox1.Controls.Add(this.tb_ocr_result);
             this.groupBox1.Controls.Add(this.btn_ocr_clean);
             this.groupBox1.Controls.Add(this.btn_ocr_copy);
-            this.groupBox1.Controls.Add(this.tabControl);
             this.groupBox1.Location = new System.Drawing.Point(2, 2);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
@@ -312,17 +246,18 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "文字识别";
             // 
-            // btn_ocr_copy_to_excel
+            // tb_ocr_result
             // 
-            this.btn_ocr_copy_to_excel.BackColor = System.Drawing.SystemColors.Control;
-            this.btn_ocr_copy_to_excel.Location = new System.Drawing.Point(448, 18);
-            this.btn_ocr_copy_to_excel.Margin = new System.Windows.Forms.Padding(2);
-            this.btn_ocr_copy_to_excel.Name = "btn_ocr_copy_to_excel";
-            this.btn_ocr_copy_to_excel.Size = new System.Drawing.Size(86, 27);
-            this.btn_ocr_copy_to_excel.TabIndex = 4;
-            this.btn_ocr_copy_to_excel.Text = "复制到表格";
-            this.btn_ocr_copy_to_excel.UseVisualStyleBackColor = false;
-            this.btn_ocr_copy_to_excel.Click += new System.EventHandler(this.btn_ocr_copy_to_excel_Click);
+            this.tb_ocr_result.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tb_ocr_result.Location = new System.Drawing.Point(6, 49);
+            this.tb_ocr_result.Margin = new System.Windows.Forms.Padding(2);
+            this.tb_ocr_result.Multiline = true;
+            this.tb_ocr_result.Name = "tb_ocr_result";
+            this.tb_ocr_result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.tb_ocr_result.Size = new System.Drawing.Size(708, 281);
+            this.tb_ocr_result.TabIndex = 0;
             // 
             // btn_ocr_clean
             // 
@@ -348,65 +283,6 @@
             this.btn_ocr_copy.UseVisualStyleBackColor = false;
             this.btn_ocr_copy.Click += new System.EventHandler(this.btn_ocr_copy_Click);
             // 
-            // tabControl
-            // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tab_page_word);
-            this.tabControl.Controls.Add(this.tab_page_form);
-            this.tabControl.Location = new System.Drawing.Point(5, 30);
-            this.tabControl.Name = "tabControl";
-            this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(713, 303);
-            this.tabControl.TabIndex = 3;
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
-            // 
-            // tab_page_word
-            // 
-            this.tab_page_word.Controls.Add(this.tb_ocr_result);
-            this.tab_page_word.Location = new System.Drawing.Point(4, 22);
-            this.tab_page_word.Name = "tab_page_word";
-            this.tab_page_word.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_page_word.Size = new System.Drawing.Size(705, 277);
-            this.tab_page_word.TabIndex = 0;
-            this.tab_page_word.Text = "文字";
-            this.tab_page_word.UseVisualStyleBackColor = true;
-            // 
-            // tb_ocr_result
-            // 
-            this.tb_ocr_result.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-            this.tb_ocr_result.Location = new System.Drawing.Point(5, 5);
-            this.tb_ocr_result.Margin = new System.Windows.Forms.Padding(2);
-            this.tb_ocr_result.Multiline = true;
-            this.tb_ocr_result.Name = "tb_ocr_result";
-            this.tb_ocr_result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_ocr_result.Size = new System.Drawing.Size(695, 267);
-            this.tb_ocr_result.TabIndex = 0;
-            // 
-            // tab_page_form
-            // 
-            this.tab_page_form.Controls.Add(this.dataGridView);
-            this.tab_page_form.Location = new System.Drawing.Point(4, 22);
-            this.tab_page_form.Name = "tab_page_form";
-            this.tab_page_form.Padding = new System.Windows.Forms.Padding(3);
-            this.tab_page_form.Size = new System.Drawing.Size(705, 277);
-            this.tab_page_form.TabIndex = 1;
-            this.tab_page_form.Text = "表格";
-            this.tab_page_form.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView
-            // 
-            this.dataGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView.Location = new System.Drawing.Point(3, 3);
-            this.dataGridView.Name = "dataGridView";
-            this.dataGridView.RowHeadersVisible = false;
-            this.dataGridView.RowTemplate.Height = 23;
-            this.dataGridView.Size = new System.Drawing.Size(699, 271);
-            this.dataGridView.TabIndex = 0;
-            // 
             // groupBox2
             // 
             this.groupBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
@@ -424,7 +300,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(720, 172);
+            this.groupBox2.Size = new System.Drawing.Size(720, 174);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "翻译";
@@ -521,7 +397,7 @@
             this.tb_translate_result.Multiline = true;
             this.tb_translate_result.Name = "tb_translate_result";
             this.tb_translate_result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_translate_result.Size = new System.Drawing.Size(712, 126);
+            this.tb_translate_result.Size = new System.Drawing.Size(712, 128);
             this.tb_translate_result.TabIndex = 1;
             // 
             // contextMenuStrip_notify
@@ -529,14 +405,10 @@
             this.contextMenuStrip_notify.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip_notify.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.显示ToolStripMenuItem,
-            this.截图ToolStripMenuItem,
-            this.贴图ToolStripMenuItem,
-            this.屏幕取色ToolStripMenuItem,
             this.文字识别ToolStripMenuItem1,
-            this.表格识别ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.contextMenuStrip_notify.Name = "contextMenuStrip1";
-            this.contextMenuStrip_notify.Size = new System.Drawing.Size(125, 158);
+            this.contextMenuStrip_notify.Size = new System.Drawing.Size(125, 70);
             // 
             // 显示ToolStripMenuItem
             // 
@@ -545,40 +417,12 @@
             this.显示ToolStripMenuItem.Text = "显示界面";
             this.显示ToolStripMenuItem.Click += new System.EventHandler(this.显示ToolStripMenuItem_Click);
             // 
-            // 截图ToolStripMenuItem
-            // 
-            this.截图ToolStripMenuItem.Name = "截图ToolStripMenuItem";
-            this.截图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.截图ToolStripMenuItem.Text = "截图";
-            this.截图ToolStripMenuItem.Click += new System.EventHandler(this.截图ToolStripMenuItem_Click);
-            // 
-            // 贴图ToolStripMenuItem
-            // 
-            this.贴图ToolStripMenuItem.Name = "贴图ToolStripMenuItem";
-            this.贴图ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.贴图ToolStripMenuItem.Text = "贴图";
-            this.贴图ToolStripMenuItem.Click += new System.EventHandler(this.贴图ToolStripMenuItem_Click);
-            // 
-            // 屏幕取色ToolStripMenuItem
-            // 
-            this.屏幕取色ToolStripMenuItem.Name = "屏幕取色ToolStripMenuItem";
-            this.屏幕取色ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.屏幕取色ToolStripMenuItem.Text = "屏幕取色";
-            this.屏幕取色ToolStripMenuItem.Click += new System.EventHandler(this.屏幕取色ToolStripMenuItem_Click);
-            // 
             // 文字识别ToolStripMenuItem1
             // 
             this.文字识别ToolStripMenuItem1.Name = "文字识别ToolStripMenuItem1";
             this.文字识别ToolStripMenuItem1.Size = new System.Drawing.Size(124, 22);
             this.文字识别ToolStripMenuItem1.Text = "文字识别";
             this.文字识别ToolStripMenuItem1.Click += new System.EventHandler(this.文字识别ToolStripMenuItem1_Click);
-            // 
-            // 表格识别ToolStripMenuItem
-            // 
-            this.表格识别ToolStripMenuItem.Name = "表格识别ToolStripMenuItem";
-            this.表格识别ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-            this.表格识别ToolStripMenuItem.Text = "表格识别";
-            this.表格识别ToolStripMenuItem.Click += new System.EventHandler(this.表格识别ToolStripMenuItem_Click);
             // 
             // 退出ToolStripMenuItem
             // 
@@ -596,20 +440,6 @@
             this.notifyIcon.BalloonTipClicked += new System.EventHandler(this.notifyIcon_BalloonTipClicked);
             this.notifyIcon.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseClick);
             // 
-            // 文字识别服务ToolStripMenuItem
-            // 
-            this.文字识别服务ToolStripMenuItem.Name = "文字识别服务ToolStripMenuItem";
-            this.文字识别服务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.文字识别服务ToolStripMenuItem.Text = "文字识别服务";
-            this.文字识别服务ToolStripMenuItem.Click += new System.EventHandler(this.文字识别服务ToolStripMenuItem_Click);
-            // 
-            // 机器翻译服务ToolStripMenuItem
-            // 
-            this.机器翻译服务ToolStripMenuItem.Name = "机器翻译服务ToolStripMenuItem";
-            this.机器翻译服务ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.机器翻译服务ToolStripMenuItem.Text = "机器翻译服务";
-            this.机器翻译服务ToolStripMenuItem.Click += new System.EventHandler(this.机器翻译服务ToolStripMenuItem_Click);
-            // 
             // Form_main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -623,7 +453,7 @@
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Form_main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "屏幕工具";
+            this.Text = "截图文字识别翻译工具";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_main_FormClosing);
             this.Load += new System.EventHandler(this.Form_main_Load);
             this.Resize += new System.EventHandler(this.Form_main_Resize);
@@ -635,11 +465,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
-            this.tabControl.ResumeLayout(false);
-            this.tab_page_word.ResumeLayout(false);
-            this.tab_page_word.PerformLayout();
-            this.tab_page_form.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();
+            this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.contextMenuStrip_notify.ResumeLayout(false);
@@ -663,7 +489,6 @@
         private System.Windows.Forms.ToolStripMenuItem 快捷键设置ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 关于我们ToolStripMenuItem;
         private System.Windows.Forms.Button btn_ocr_basic;
-        private System.Windows.Forms.Button btn_screenshot;
         private System.Windows.Forms.TextBox tb_ocr_result;
         private System.Windows.Forms.Button btn_translate;
         private System.Windows.Forms.CheckBox cb_auto_translate;
@@ -679,22 +504,9 @@
         private System.Windows.Forms.Button btn_ocr_clean;
         private System.Windows.Forms.Button btn_ocr_copy;
         private System.Windows.Forms.CheckBox cb_drag_translate;
-        private System.Windows.Forms.Button btn_color;
         private System.Windows.Forms.ComboBox cb_translate_type;
-        private System.Windows.Forms.Button btn_screen_paste;
         private System.Windows.Forms.ToolStripMenuItem 开机启动ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 截图ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 贴图ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 屏幕取色ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 文字识别ToolStripMenuItem1;
-        private System.Windows.Forms.Button btn_ocr_excel;
-        private System.Windows.Forms.Button btn_ocr_copy_to_excel;
-        private System.Windows.Forms.TabControl tabControl;
-        private System.Windows.Forms.TabPage tab_page_word;
-        private System.Windows.Forms.TabPage tab_page_form;
-        private System.Windows.Forms.DataGridView dataGridView;
-        private System.Windows.Forms.ToolStripMenuItem 表格识别ToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem 表格识别ToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem 文字识别服务ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 机器翻译服务ToolStripMenuItem;
 

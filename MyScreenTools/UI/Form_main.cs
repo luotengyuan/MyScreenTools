@@ -34,11 +34,7 @@ namespace 屏幕工具
         private Baidu.Aip.Ocr.Ocr client;
         private bool isInit = false;
 
-        private const int CatchHotKeyID = 101;
-        private const int PasteHotKeyID = 102;
-        private const int PickColorHotKeyKeyID = 103;
         private const int OcrBasicHotKeyID = 104;
-        private const int OcrExcelHotKeyID = 105;
 
         private bool is_translate_from_init = false;
         private bool is_translate_to_init = false;
@@ -111,14 +107,6 @@ namespace 屏幕工具
             mScreenHigth = System32DllHelper.GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPVERTRES);
             RegisterAllHotKey();
             StartOrStopMouseHook();
-            if (tabControl.SelectedIndex == 0)
-            {
-                btn_ocr_copy_to_excel.Visible = false;
-            }
-            else
-            {
-                btn_ocr_copy_to_excel.Visible = true;
-            }
 
             int runningTime = Environment.TickCount & Int32.MaxValue;     //获取系统启动后运行的毫秒数
             if (is_auto_start && runningTime < 300000)
@@ -136,43 +124,6 @@ namespace 屏幕工具
 
         private void RegisterAllHotKey()
         {
-            ////Handle为当前窗口句柄
-            ////101为快捷键自定义ID
-            ////0x0002为Ctrl键,
-            ////0x0001为Alt键，或运算符|表同时按住两个键有效
-            ////0x41为A键。
-            //bool isRegistered = HotKey.RegisterHotKey(Handle, 101, (0x0002 | 0x0001), 0x41);
-            //if (isRegistered == false)
-            //{
-            //    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键截图！点击查看", ToolTipIcon.Info);
-            //}
-            int catchHotKey = Properties.Settings.Default.CatchHotKey;
-            if (catchHotKey != 0)
-            {
-                bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, CatchHotKeyID, 0x0001, catchHotKey);
-                if (isRegistered == false)
-                {
-                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键截图！点击查看", ToolTipIcon.Info);
-                }
-            }
-            int pasteHotKey = Properties.Settings.Default.PasteHotKey;
-            if (pasteHotKey != 0)
-            {
-                bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, PasteHotKeyID, 0x0001, pasteHotKey);
-                if (isRegistered == false)
-                {
-                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键截图！点击查看", ToolTipIcon.Info);
-                }
-            }
-            int pickColorHotKey = Properties.Settings.Default.PickColorHotKey;
-            if (pickColorHotKey != 0)
-            {
-                bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, PickColorHotKeyKeyID, 0x0001, pickColorHotKey);
-                if (isRegistered == false)
-                {
-                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键屏幕取色！点击查看", ToolTipIcon.Info);
-                }
-            }
             int ocrBasicHotKey = Properties.Settings.Default.OcrBasicHotKey;
             if (ocrBasicHotKey != 0)
             {
@@ -182,24 +133,11 @@ namespace 屏幕工具
                     this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键文字识别！点击查看", ToolTipIcon.Info);
                 }
             }
-            int ocrExcelHotKey = Properties.Settings.Default.OcrExcelHotKey;
-            if (ocrExcelHotKey != 0)
-            {
-                bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, OcrExcelHotKeyID, 0x0001, ocrExcelHotKey);
-                if (isRegistered == false)
-                {
-                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键文字识别！点击查看", ToolTipIcon.Info);
-                }
-            }
         }
 
         private void UnregisterAllHotKey()
         {
-            HotKeyDllHelper.UnregisterHotKey(Handle, CatchHotKeyID);
-            HotKeyDllHelper.UnregisterHotKey(Handle, PasteHotKeyID);
-            HotKeyDllHelper.UnregisterHotKey(Handle, PickColorHotKeyKeyID);
             HotKeyDllHelper.UnregisterHotKey(Handle, OcrBasicHotKeyID);
-            HotKeyDllHelper.UnregisterHotKey(Handle, OcrExcelHotKeyID);
         }
 
         private void InitBaiduYun(string apiKey, string secretKey)
@@ -247,21 +185,6 @@ namespace 屏幕工具
 
         #region 按钮点击事件
 
-        private void btn_screenshot_Click(object sender, EventArgs e)
-        {
-            ScreenShot(CatchType.CATCH);
-        }
-
-        private void btn_screen_paste_Click(object sender, EventArgs e)
-        {
-            ScreenShot(CatchType.PASTE);
-        }
-
-        private void btn_color_Click(object sender, EventArgs e)
-        {
-            ShowPickColor();
-        }
-
         private void btn_ocr_basic_Click(object sender, EventArgs e)
         {
             if (!isInit)
@@ -272,81 +195,31 @@ namespace 屏幕工具
             ScreenShot(CatchType.OCR_BASIC);
         }
 
-        private void btn_ocr_excel_Click(object sender, EventArgs e)
-        {
-            if (!isInit)
-            {
-                MessageBox.Show("百度云OCR账号信息未设置：请点击【设置】-->【百度云设置】进行修改");
-                return;
-            }
-            ScreenShot(CatchType.OCR_EXCEL);
-        }
-
         private void btn_ocr_copy_Click(object sender, EventArgs e)
         {
-            if (tabControl.SelectedIndex == 0)
+            //复制到粘贴板
+            if (!"".Equals(tb_ocr_result.Text))
             {
-                //复制到粘贴板
-                if (!"".Equals(tb_ocr_result.Text))
+                try
                 {
-                    try
-                    {
-                        Clipboard.Clear();
-                        Clipboard.SetDataObject(tb_ocr_result.Text.ToString());
-                        MessageBox.Show("拷贝成功");
-                    }
-                    catch (Exception)
-                    {
-                        MessageBox.Show("拷贝失败");
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("拷贝内容为空");
-                }
-            }
-            else
-            {
-                if (CopyToClipboard(dataGridView, "MyScreenTools"))
-                {
+                    Clipboard.Clear();
+                    Clipboard.SetDataObject(tb_ocr_result.Text.ToString());
                     MessageBox.Show("拷贝成功");
                 }
-                else
+                catch (Exception)
                 {
                     MessageBox.Show("拷贝失败");
                 }
             }
-        }
-
-        private void btn_ocr_copy_to_excel_Click(object sender, EventArgs e)
-        {
-            if (tabControl.SelectedIndex == 0)
-            {
-                tb_ocr_result.Text = "";
-            }
             else
             {
-                if (CopyToExcel(dataGridView, "MyScreenTools"))
-                {
-                    MessageBox.Show("拷贝成功");
-                }
-                else
-                {
-                    MessageBox.Show("拷贝失败");
-                }
+                MessageBox.Show("拷贝内容为空");
             }
         }
 
         private void btn_ocr_clean_Click(object sender, EventArgs e)
         {
-            if (tabControl.SelectedIndex == 0)
-            {
-                tb_ocr_result.Text = "";
-            }
-            else
-            {
-                dataGridView.DataSource = new System.Data.DataTable();
-            }
+            tb_ocr_result.Text = "";
         }
 
         private void btn_translate_Click(object sender, EventArgs e)
@@ -362,17 +235,6 @@ namespace 屏幕工具
         {
             if (isScreenShot == false)
             {
-                if (type == CatchType.CATCH)
-                {
-                    isScreenShot = true;
-                    mLastLocationX = this.Location.X;
-                    mLastLocationY = this.Location.Y;
-                    this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
-                    PrScrnDllHelper.PrScrn();
-                    this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);
-                    isScreenShot = false;
-                    return;
-                }
                 Form_catch form_catch = new Form_catch(type);
                 //注册Catch窗体定义的事件委托
                 form_catch.SetICSEvent += new SetICS(SetisScreenShot);
@@ -380,19 +242,12 @@ namespace 屏幕工具
                 DialogResult result = form_catch.ShowDialog();
                 if (result == DialogResult.OK && type != CatchType.CATCH)
                 {
-                    if (type == CatchType.PASTE)
-                    {
-                        Form_paste paste = new Form_paste(form_catch.catchPicture, form_catch.Rect);
-                        paste.Show();
-                    }
-                    else if (type == CatchType.OCR_BASIC)
+                    if (type == CatchType.OCR_BASIC)
                     {
                         if (this.Visible == false)
                         {
                             this.ShowForm();
                         }
-                        // 切换到文字视图
-                        tabControl.SelectedIndex = 0;
                         string ocr_result = null;
                         ocr_result = OcrBasic(form_catch.catchPicture);
                         if (ocr_result != null)
@@ -409,33 +264,7 @@ namespace 屏幕工具
                             MessageBox.Show("识别失败，请检查文字识别API Key 、Secret Key是否设置正确。");
                         }
                     }
-                    else if (type == CatchType.OCR_EXCEL)
-                    {
-                        if (this.Visible == false)
-                        {
-                            this.ShowForm();
-                        }
-                        // 切换到表格视图
-                        tabControl.SelectedIndex = 1;
-                        System.Data.DataTable ocr_excel_result = null;
-                        ocr_excel_result = OcrExcel(form_catch.catchPicture);
-                        if (ocr_excel_result != null)
-                        {
-                            if (ocr_excel_result.Columns.Count <= 0)
-                            {
-                                MessageBox.Show("识别内容为空");
-                            }
-                            else
-                            {
-                                dataGridView.DataSource = ocr_excel_result;
-                            }
-                        }
-                        else
-                        {
-                            tb_ocr_result.Text = "";
-                            MessageBox.Show("识别失败，请检查文字识别API Key 、Secret Key是否设置正确。");
-                        }
-                    }
+                   
                 }
             }
         }
@@ -524,93 +353,6 @@ namespace 屏幕工具
                 return null;
             }
         }
-
-        /// <summary>
-        /// 百度表格识别
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private System.Data.DataTable OcrExcel(string path)
-        {
-            System.Data.DataTable dt = new System.Data.DataTable();//DataGridView未设置列名信息的时候可以直接指定DataSource
-            try
-            {
-                // 图片文件路径
-                var image = System.IO.File.ReadAllBytes(path);
-                // 调用通用文字识别, 图片参数为本地图片，可能会抛出网络等异常，请使用try/catch捕获
-                var result = client.Form(image);//表格识别
-                if (result == null)
-                {
-                    Console.WriteLine("识别结果为空");
-                    return null;
-                }
-                Console.WriteLine(result);
-                OcrExcelBean bean = JsonConvert.DeserializeObject<OcrExcelBean>(result.ToString());
-                if (bean == null)
-                {
-                    Console.WriteLine("识别结果为空");
-                    return null;
-                }
-                if (bean.forms_result_num <= 0 || bean.forms_result == null || bean.forms_result.Count <= 0)
-                {
-                    Console.WriteLine("未识别到表格");
-                    return null;
-                }
-                int maxColumn = 0;
-                int maxRow = 0;
-                foreach (Forms_resultItem item in bean.forms_result)
-                {
-                    List<BodyItem> bodyList = item.body;
-                    if (bodyList == null || bodyList.Count <= 0)
-                    {
-                        continue;
-                    }
-                    foreach (BodyItem body in bodyList)
-                    {
-                        if (body.column + 1 > maxColumn)
-                        {
-                            maxColumn = body.column + 1;
-                        }
-                        if (body.row + 1 > maxRow)
-                        {
-                            maxRow = body.row + 1;
-                        }
-                    }
-                    break;
-                }
-                for (int i = 0; i < maxColumn; i++)
-                {
-                    dt.Columns.Add("列-" + (i + 1), Type.GetType("System.String"));
-                }
-                for (int i = 0; i < maxRow; i++)
-                {
-                    DataRow dr = dt.NewRow();
-                    foreach (Forms_resultItem item in bean.forms_result)
-                    {
-                        List<BodyItem> bodyList = item.body;
-                        if (bodyList == null || bodyList.Count <= 0)
-                        {
-                            continue;
-                        }
-                        foreach (BodyItem body in bodyList)
-                        {
-                            if (body.row == i)
-                            {
-                                dr[body.column] = body.words;
-                            }
-                        }
-                        break;
-                    }
-                    dt.Rows.Add(dr);
-                }
-                return dt;
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine("识别出错：" + e.ToString());
-                return null;
-            }
-        }
         #endregion
 
         #region 设置菜单操作
@@ -675,50 +417,10 @@ namespace 屏幕工具
 
             if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
             {
-                // 切换到表格视图
-                tabControl.SelectedIndex = 0;
                 string ocr_result = OcrBasic(openFileDialog.FileName);
                 if (ocr_result != null)
                 {
                     tb_ocr_result.Text = ocr_result;
-                }
-                else
-                {
-                    tb_ocr_result.Text = "";
-                    MessageBox.Show("识别失败，请检查文字识别API Key 、Secret Key是否设置正确。");
-                }
-            }
-        }
-
-        private void 表格识别ToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (!isInit)
-            {
-                MessageBox.Show("百度云OCR账号信息未设置！请点击【设置】-->【百度云设置】进行修改");
-                return;
-            }
-            OpenFileDialog openFileDialog = new OpenFileDialog()
-            {
-                Title = "请选择文件夹",
-                Filter = "图片文件|*.jpg;*.png;*.jpeg;*.bmp"//jpg/jpeg/png/bmp
-            };
-
-            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                // 切换到表格视图
-                tabControl.SelectedIndex = 1;
-                System.Data.DataTable ocr_excel_result = null;
-                ocr_excel_result = OcrExcel(openFileDialog.FileName);
-                if (ocr_excel_result != null)
-                {
-                    if (ocr_excel_result.Columns.Count <= 0)
-                    {
-                        MessageBox.Show("识别内容为空");
-                    }
-                    else
-                    {
-                        dataGridView.DataSource = ocr_excel_result;
-                    }
                 }
                 else
                 {
@@ -734,39 +436,12 @@ namespace 屏幕工具
             about.Show();
         }
 
-        private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (tabControl.SelectedIndex == 0)
-            {
-                btn_ocr_copy_to_excel.Visible = false;
-            }
-            else
-            {
-                btn_ocr_copy_to_excel.Visible = true;
-            }
-        }
-
         #endregion
 
         #region 系统托管图标右键菜单
         private void 显示ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             this.ShowForm();
-        }
-
-        private void 截图ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ScreenShot(CatchType.CATCH);
-        }
-
-        private void 贴图ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ScreenShot(CatchType.PASTE);
-        }
-
-        private void 屏幕取色ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            ShowPickColor();
         }
 
         private void 文字识别ToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -779,19 +454,6 @@ namespace 屏幕工具
             else
             {
                 ScreenShot(CatchType.OCR_BASIC);
-            }
-        }
-
-        private void 表格识别ToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (!isInit)
-            {
-                MessageBox.Show("百度云OCR账号信息未设置！请点击【设置】-->【百度云设置】进行修改");
-                return;
-            }
-            else
-            {
-                ScreenShot(CatchType.OCR_EXCEL);
             }
         }
 
@@ -822,15 +484,6 @@ namespace 屏幕工具
         {
             switch (m.WParam.ToInt32())
             {
-                case CatchHotKeyID:
-                    ScreenShot(CatchType.CATCH);
-                    break;
-                case PasteHotKeyID:
-                    ScreenShot(CatchType.PASTE);
-                    break;
-                case PickColorHotKeyKeyID:
-                    ShowPickColor();
-                    break;
                 case OcrBasicHotKeyID:
                     if (!isInit)
                     {
@@ -840,17 +493,6 @@ namespace 屏幕工具
                     else
                     {
                         ScreenShot(CatchType.OCR_BASIC);
-                    }
-                    break;
-                case OcrExcelHotKeyID:
-                    if (!isInit)
-                    {
-                        MessageBox.Show("百度云OCR账号信息未设置！请点击【设置】-->【百度云设置】进行修改");
-                        return;
-                    }
-                    else
-                    {
-                        ScreenShot(CatchType.OCR_EXCEL);
                     }
                     break;
                 default:
@@ -1172,25 +814,6 @@ namespace 屏幕工具
 
         #endregion
 
-        #region 屏幕取色
-        private void ShowPickColor()
-        {
-            Form_color color = new Form_color();
-            if (this.Visible)
-            {
-                mLastLocationX = this.Location.X;
-                mLastLocationY = this.Location.Y;
-                this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
-            }
-            color.ShowDialog();
-            if (this.Visible)
-            {
-                this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);
-            }
-        }
-
-        #endregion
-
         #region 通用方法
         /// <summary>
         /// 判断字符串中是否包含中文
@@ -1232,106 +855,6 @@ namespace 屏幕工具
                 MessageBox.Show("您需要管理员权限修改", "提示");
             }
             return false;
-        }
-
-        /// <summary>
-        /// 将DataGridView选中数据复制到Excel表格中
-        /// </summary>
-        /// <param name="ExportDgv"></param>
-        /// <param name="DgvTitle"></param>
-        /// <returns></returns>
-        public bool CopyToExcel(DataGridView ExportDgv, string DgvTitle)
-        {
-            try
-            {
-                if (ExportDgv == null)
-                {
-                    return false;
-                }
-                if (ExportDgv.Columns.Count == 0 || ExportDgv.Rows.Count == 0)
-                {
-                    return false;
-                }
-                //Excela2003最大行是65535，最大列是255
-                //Excela2007最大行是1048576，最大列是16384
-                //if(ExportDgv.RowCount > 65536 || ExportDgv.ColumnCount > 256){
-                //return false;
-                //}
-                ExportDgv.Focus();
-                //复制数据到Clipboard
-                int I = ExportDgv.GetCellCount(DataGridViewElementStates.Selected);
-                if (I > 0)
-                {
-                    Clipboard.Clear();
-                    Clipboard.SetDataObject(ExportDgv.GetClipboardContent());
-                }
-                //创建Excel)对象
-                Microsoft.Office.Interop.Excel.Application xlApp = new Microsoft.Office.Interop.Excel.Application();
-                if (xlApp == null)
-                {
-                    return false;
-                }
-                //创建Excel工作薄
-                Microsoft.Office.Interop.Excel.Workbook xlBook = xlApp.Workbooks.Add(true);
-                //创建Excel工作表
-                Microsoft.Office.Interop.Excel.Worksheet xlSheet = (Microsoft.Office.Interop.Excel.Worksheet)xlBook.Worksheets[1];// 第一个工作表
-                //粘贴数据
-                xlSheet.get_Range("A1", System.Type.Missing).PasteSpecial(XlPasteType.xlPasteAll, XlPasteSpecialOperation.xlPasteSpecialOperationNone, System.Type.Missing, System.Type.Missing);
-                //显示工作薄区间
-                xlApp.Visible = true;
-                xlApp.Caption = DgvTitle;
-                //设置文本表格的属性
-                xlApp.Cells.EntireColumn.AutoFit();//自动列宽
-                xlApp.Cells.VerticalAlignment = Microsoft.Office.Interop.Excel.Constants.xlCenter;
-                xlApp.Cells.HorizontalAlignment = Microsoft.Office.Interop.Excel.Constants.xlLeft;
-                xlApp.ErrorCheckingOptions.BackgroundChecking = false;
-                xlApp.ErrorCheckingOptions.BackgroundChecking = false;
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// 将DataGridView选中数据复制到剪贴板
-        /// </summary>
-        /// <param name="ExportDgv"></param>
-        /// <param name="DgvTitle"></param>
-        /// <returns></returns>
-        public bool CopyToClipboard(DataGridView ExportDgv, string DgvTitle)
-        {
-            try
-            {
-                if (ExportDgv == null)
-                {
-                    return false;
-                }
-                if (ExportDgv.Columns.Count == 0 || ExportDgv.Rows.Count == 0)
-                {
-                    return false;
-                }
-                //Excela2003最大行是65535，最大列是255
-                //Excela2007最大行是1048576，最大列是16384
-                //if(ExportDgv.RowCount > 65536 || ExportDgv.ColumnCount > 256){
-                //return false;
-                //}
-                ExportDgv.Focus();
-                //复制数据到Clipboard
-                int I = ExportDgv.GetCellCount(DataGridViewElementStates.Selected);
-                if (I <= 0)
-                {
-                    return false;
-                }
-                Clipboard.Clear();
-                Clipboard.SetDataObject(ExportDgv.GetClipboardContent());
-                return true;
-            }
-            catch
-            {
-                return false;
-            }
         }
 
         #endregion

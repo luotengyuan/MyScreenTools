@@ -97,7 +97,6 @@
     <Compile Include="Bean\WordResult.cs" />
     <Compile Include="Bean\WordsResultItem.cs" />
     <Compile Include="Enums\CatchType.cs" />
-    <Compile Include="Utils\ColorConversionUtils.cs" />
     <Compile Include="Enums\DeviceCap.cs" />
     <Compile Include="LibHelper\ForegroundWindow.cs" />
     <Compile Include="UI\Form_about.cs">
@@ -118,23 +117,11 @@
     <Compile Include="UI\Form_catch.Designer.cs">
       <DependentUpon>Form_catch.cs</DependentUpon>
     </Compile>
-    <Compile Include="UI\Form_color.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Form_color.Designer.cs">
-      <DependentUpon>Form_color.cs</DependentUpon>
-    </Compile>
     <Compile Include="UI\Form_main.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="UI\Form_main.Designer.cs">
       <DependentUpon>Form_main.cs</DependentUpon>
-    </Compile>
-    <Compile Include="UI\Form_paste.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="UI\Form_paste.Designer.cs">
-      <DependentUpon>Form_paste.cs</DependentUpon>
     </Compile>
     <Compile Include="UI\Form_shortcut.cs">
       <SubType>Form</SubType>
@@ -157,14 +144,8 @@
     <EmbeddedResource Include="UI\Form_catch.resx">
       <DependentUpon>Form_catch.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="UI\Form_color.resx">
-      <DependentUpon>Form_color.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="UI\Form_main.resx">
       <DependentUpon>Form_main.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="UI\Form_paste.resx">
-      <DependentUpon>Form_paste.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\Form_shortcut.resx">
       <DependentUpon>Form_shortcut.cs</DependentUpon>
