@@ -61,7 +61,7 @@ namespace 屏幕工具.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("86")]
+        [global::System.Configuration.DefaultSettingValueAttribute("88")]
         public int OcrBasicHotKey {
             get {
                 return ((int)(this["OcrBasicHotKey"]));
@@ -145,7 +145,7 @@ namespace 屏幕工具.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("67")]
+        [global::System.Configuration.DefaultSettingValueAttribute("83")]
         public int PickColorHotKey {
             get {
                 return ((int)(this["PickColorHotKey"]));
@@ -181,7 +181,7 @@ namespace 屏幕工具.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("88")]
+        [global::System.Configuration.DefaultSettingValueAttribute("84")]
         public int PasteHotKey {
             get {
                 return ((int)(this["PasteHotKey"]));
@@ -193,13 +193,25 @@ namespace 屏幕工具.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("66")]
+        [global::System.Configuration.DefaultSettingValueAttribute("67")]
         public int OcrExcelHotKey {
             get {
                 return ((int)(this["OcrExcelHotKey"]));
             }
             set {
                 this["OcrExcelHotKey"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("71")]
+        public int GifHotKey {
+            get {
+                return ((int)(this["GifHotKey"]));
+            }
+            set {
+                this["GifHotKey"] = value;
             }
         }
     }

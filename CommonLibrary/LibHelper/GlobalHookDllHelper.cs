@@ -8,7 +8,7 @@ using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
-namespace 屏幕工具
+namespace CommonLibrary
 {
     public abstract class GlobalHookDllHelper
     {

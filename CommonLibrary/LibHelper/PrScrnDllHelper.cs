@@ -5,7 +5,7 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace 屏幕工具
+namespace CommonLibrary
 {
     public class PrScrnDllHelper
     {

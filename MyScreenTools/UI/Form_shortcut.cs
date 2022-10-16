@@ -17,6 +17,7 @@ namespace 屏幕工具
         int mPickColorHotKey = 0;
         int mOcrBasicHotKey = 0;
         int mOcrExcelHotKey = 0;
+        int mGifHotKey = 0;
         bool mIsSetSuccess = false;
         public Form_shortcut()
         {
@@ -49,6 +50,11 @@ namespace 屏幕工具
             if (mOcrExcelHotKey != 0)
             {
                 tb_ocr_excel_key.Text = Char.ConvertFromUtf32(mOcrExcelHotKey);
+            }
+            mGifHotKey = Properties.Settings.Default.GifHotKey;
+            if (mGifHotKey != 0)
+            {
+                tb_gif_key.Text = Char.ConvertFromUtf32(mGifHotKey);
             }
         }
 
@@ -171,6 +177,30 @@ namespace 屏幕工具
             if (mOcrExcelHotKey != 0)
             {
                 Properties.Settings.Default.OcrExcelHotKey = mOcrExcelHotKey;
+                Properties.Settings.Default.Save();
+                mIsSetSuccess = true;
+            }
+            else
+            {
+                MessageBox.Show("设置失败");
+            }
+        }
+
+        private void tb_gif_key_KeyUp(object sender, KeyEventArgs e)
+        {
+            // 目前仅支持Alt+单个字母的组合键
+            if (e.KeyValue >= 0x41 && e.KeyValue <= 0x5A)
+            {
+                tb_gif_key.Text = e.KeyCode.ToString();
+                mGifHotKey = e.KeyValue;
+            }
+        }
+
+        private void btn_gif_Click(object sender, EventArgs e)
+        {
+            if (mGifHotKey != 0)
+            {
+                Properties.Settings.Default.GifHotKey = mGifHotKey;
                 Properties.Settings.Default.Save();
                 mIsSetSuccess = true;
             }

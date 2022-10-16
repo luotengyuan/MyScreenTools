@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="ScreenToGif.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="Setting_gif_area_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">500, 400</Value>
+    </Setting>
+    <Setting Name="Setting_gif_area_location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">500, 400</Value>
+    </Setting>
+    <Setting Name="Setting_gif_fps" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="Setting_is_full_screen" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Setting_is_catch_mouse" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="Setting_form_size" Type="System.Drawing.Size" Scope="User">
+      <Value Profile="(Default)">600, 500</Value>
+    </Setting>
+    <Setting Name="Setting_form_location" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">500, 400</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>

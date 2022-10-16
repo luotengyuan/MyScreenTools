@@ -8,8 +8,10 @@ using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using ScreenColorPicker.Utils;
+using ScreenColorPicker.LibHelper;
 
-namespace 屏幕工具
+namespace ScreenColorPicker.UI
 {
     public struct POINTAPI
     {

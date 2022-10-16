@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 using System.Diagnostics;
 
-namespace 屏幕工具
+namespace CommonLibrary
 {
-    class ForegroundWindow
+    public class ForegroundWindow
     {
         [DllImport("User32.dll")]
         private static extern bool SetForegroundWindow(IntPtr hWnd);

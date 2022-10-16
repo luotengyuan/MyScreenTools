@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace 屏幕工具
+namespace ScreenColorPicker.Utils
 {
     class ColorConversionUtils
     {

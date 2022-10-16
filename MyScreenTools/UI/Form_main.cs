@@ -18,6 +18,9 @@ using Microsoft.CSharp;//Microsoft.CSharp 否则会提示 缺少编译器要求�
 using System.Threading;
 using System.Text.RegularExpressions;
 using Microsoft.Office.Interop.Excel;
+using ScreenToGif.UI;
+using ScreenColorPicker.UI;
+using CommonLibrary;
 
 namespace 屏幕工具
 {
@@ -39,6 +42,7 @@ namespace 屏幕工具
         private const int PickColorHotKeyKeyID = 103;
         private const int OcrBasicHotKeyID = 104;
         private const int OcrExcelHotKeyID = 105;
+        private const int GifHotKeyID = 106;
 
         private bool is_translate_from_init = false;
         private bool is_translate_to_init = false;
@@ -191,6 +195,15 @@ namespace 屏幕工具
                     this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键文字识别！点击查看", ToolTipIcon.Info);
                 }
             }
+            int gifHotKey = Properties.Settings.Default.GifHotKey;
+            if (gifHotKey != 0)
+            {
+                bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, GifHotKeyID, 0x0001, gifHotKey);
+                if (isRegistered == false)
+                {
+                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键文字识别！点击查看", ToolTipIcon.Info);
+                }
+            }
         }
 
         private void UnregisterAllHotKey()
@@ -200,6 +213,7 @@ namespace 屏幕工具
             HotKeyDllHelper.UnregisterHotKey(Handle, PickColorHotKeyKeyID);
             HotKeyDllHelper.UnregisterHotKey(Handle, OcrBasicHotKeyID);
             HotKeyDllHelper.UnregisterHotKey(Handle, OcrExcelHotKeyID);
+            HotKeyDllHelper.UnregisterHotKey(Handle, GifHotKeyID);
         }
 
         private void InitBaiduYun(string apiKey, string secretKey)
@@ -280,6 +294,11 @@ namespace 屏幕工具
                 return;
             }
             ScreenShot(CatchType.OCR_EXCEL);
+        }
+
+        private void btn_screen_gif_Click(object sender, EventArgs e)
+        {
+            ShowScreenToGif();
         }
 
         private void btn_ocr_copy_Click(object sender, EventArgs e)
@@ -853,6 +872,9 @@ namespace 屏幕工具
                         ScreenShot(CatchType.OCR_EXCEL);
                     }
                     break;
+                case GifHotKeyID:
+                    ShowScreenToGif();
+                    break;
                 default:
                     break;
             }
@@ -1183,6 +1205,26 @@ namespace 屏幕工具
                 this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
             }
             color.ShowDialog();
+            if (this.Visible)
+            {
+                this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);
+            }
+        }
+
+        #endregion
+
+        #region 截屏GIF
+
+        private void ShowScreenToGif()
+        {
+            Form_gif_main gif_main = new Form_gif_main();
+            if (this.Visible)
+            {
+                mLastLocationX = this.Location.X;
+                mLastLocationY = this.Location.Y;
+                this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
+            }
+            gif_main.ShowDialog();
             if (this.Visible)
             {
                 this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);

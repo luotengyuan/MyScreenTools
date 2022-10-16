@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyScreenTools", "MyScreenTo
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "MyScreenToolsSetup", "MyScreenToolsSetup\MyScreenToolsSetup.vdproj", "{A4839F35-F3C0-4F02-B935-2FDAA6749AF7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenToGif", "ScreenToGif\ScreenToGif.csproj", "{51F5B263-0DF8-46AE-B1BB-A4AF0B12F69F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScreenColorPicker", "ScreenColorPicker\ScreenColorPicker.csproj", "{272D703B-B7A7-4993-8690-23390223D736}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CommonLibrary", "CommonLibrary\CommonLibrary.csproj", "{F8D030E9-2CFD-499B-B87F-80F8E2C57AA1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,6 +25,18 @@ Global
 		{57FBE5AB-F79C-466E-8CFE-7431BD8D1632}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A4839F35-F3C0-4F02-B935-2FDAA6749AF7}.Debug|Any CPU.ActiveCfg = Debug
 		{A4839F35-F3C0-4F02-B935-2FDAA6749AF7}.Release|Any CPU.ActiveCfg = Release
+		{51F5B263-0DF8-46AE-B1BB-A4AF0B12F69F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51F5B263-0DF8-46AE-B1BB-A4AF0B12F69F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51F5B263-0DF8-46AE-B1BB-A4AF0B12F69F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51F5B263-0DF8-46AE-B1BB-A4AF0B12F69F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{272D703B-B7A7-4993-8690-23390223D736}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{272D703B-B7A7-4993-8690-23390223D736}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{272D703B-B7A7-4993-8690-23390223D736}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{272D703B-B7A7-4993-8690-23390223D736}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F8D030E9-2CFD-499B-B87F-80F8E2C57AA1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F8D030E9-2CFD-499B-B87F-80F8E2C57AA1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F8D030E9-2CFD-499B-B87F-80F8E2C57AA1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F8D030E9-2CFD-499B-B87F-80F8E2C57AA1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

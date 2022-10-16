@@ -12,7 +12,7 @@
       <Value Profile="(Default)">90</Value>
     </Setting>
     <Setting Name="OcrBasicHotKey" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">86</Value>
+      <Value Profile="(Default)">88</Value>
     </Setting>
     <Setting Name="TranslateFrom" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -33,7 +33,7 @@
       <Value Profile="(Default)" />
     </Setting>
     <Setting Name="PickColorHotKey" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">67</Value>
+      <Value Profile="(Default)">83</Value>
     </Setting>
     <Setting Name="TranslateType" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">0</Value>
@@ -42,10 +42,13 @@
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="PasteHotKey" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">88</Value>
+      <Value Profile="(Default)">84</Value>
     </Setting>
     <Setting Name="OcrExcelHotKey" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">66</Value>
+      <Value Profile="(Default)">67</Value>
+    </Setting>
+    <Setting Name="GifHotKey" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">71</Value>
     </Setting>
   </Settings>
 </SettingsFile>

@@ -1,4 +1,4 @@
-﻿namespace 屏幕工具
+﻿namespace ScreenColorPicker.UI
 {
     partial class Form_color
     {
@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_color));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -133,7 +134,6 @@
             // 
             // pb_picture
             // 
-            this.pb_picture.BackgroundImage = global::屏幕工具.Properties.Resources.ocr_48;
             this.pb_picture.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
             this.pb_picture.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pb_picture.Location = new System.Drawing.Point(290, 72);
@@ -241,6 +241,7 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "Form_color";

@@ -5,9 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Runtime.InteropServices;
 
-namespace 屏幕工具
+namespace CommonLibrary
 {
-    class HotKeyDllHelper
+    public class HotKeyDllHelper
     {
         //加载dll,调用win32API。
         [DllImport("user32.dll", SetLastError = true)]
