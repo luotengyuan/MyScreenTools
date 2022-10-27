@@ -21,6 +21,7 @@ using Microsoft.Office.Interop.Excel;
 using ScreenToGif.UI;
 using ScreenColorPicker.UI;
 using CommonLibrary;
+using GIFSicleTool;
 
 namespace 屏幕工具
 {
@@ -39,10 +40,8 @@ namespace 屏幕工具
 
         private const int CatchHotKeyID = 101;
         private const int PasteHotKeyID = 102;
-        private const int PickColorHotKeyKeyID = 103;
-        private const int OcrBasicHotKeyID = 104;
-        private const int OcrExcelHotKeyID = 105;
-        private const int GifHotKeyID = 106;
+        private const int OcrBasicHotKeyID = 103;
+        private const int OcrExcelHotKeyID = 104;
 
         private bool is_translate_from_init = false;
         private bool is_translate_to_init = false;
@@ -158,6 +157,10 @@ namespace 屏幕工具
                 {
                     this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键截图！点击查看", ToolTipIcon.Info);
                 }
+                else
+                {
+                    this.toolTip.SetToolTip(btn_screenshot, "截图（Alt+" + char.ConvertFromUtf32(catchHotKey) + "）");
+                }
             }
             int pasteHotKey = Properties.Settings.Default.PasteHotKey;
             if (pasteHotKey != 0)
@@ -165,16 +168,11 @@ namespace 屏幕工具
                 bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, PasteHotKeyID, 0x0001, pasteHotKey);
                 if (isRegistered == false)
                 {
-                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键截图！点击查看", ToolTipIcon.Info);
+                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键贴图！点击查看", ToolTipIcon.Info);
                 }
-            }
-            int pickColorHotKey = Properties.Settings.Default.PickColorHotKey;
-            if (pickColorHotKey != 0)
-            {
-                bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, PickColorHotKeyKeyID, 0x0001, pickColorHotKey);
-                if (isRegistered == false)
+                else
                 {
-                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键屏幕取色！点击查看", ToolTipIcon.Info);
+                    this.toolTip.SetToolTip(btn_screen_paste, "贴图（Alt+" + char.ConvertFromUtf32(pasteHotKey) + "）");
                 }
             }
             int ocrBasicHotKey = Properties.Settings.Default.OcrBasicHotKey;
@@ -185,6 +183,10 @@ namespace 屏幕工具
                 {
                     this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键文字识别！点击查看", ToolTipIcon.Info);
                 }
+                else
+                {
+                    this.toolTip.SetToolTip(btn_ocr_basic, "文字识别（Alt+" + char.ConvertFromUtf32(ocrBasicHotKey) + "）");
+                }
             }
             int ocrExcelHotKey = Properties.Settings.Default.OcrExcelHotKey;
             if (ocrExcelHotKey != 0)
@@ -192,16 +194,11 @@ namespace 屏幕工具
                 bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, OcrExcelHotKeyID, 0x0001, ocrExcelHotKey);
                 if (isRegistered == false)
                 {
-                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键文字识别！点击查看", ToolTipIcon.Info);
+                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键表格识别！点击查看", ToolTipIcon.Info);
                 }
-            }
-            int gifHotKey = Properties.Settings.Default.GifHotKey;
-            if (gifHotKey != 0)
-            {
-                bool isRegistered = HotKeyDllHelper.RegisterHotKey(Handle, GifHotKeyID, 0x0001, gifHotKey);
-                if (isRegistered == false)
+                else
                 {
-                    this.notifyIcon.ShowBalloonTip(300, "快捷键被占用", "无法使用快捷键文字识别！点击查看", ToolTipIcon.Info);
+                    this.toolTip.SetToolTip(btn_ocr_excel, "表格识别（Alt+" + char.ConvertFromUtf32(ocrExcelHotKey) + "）");
                 }
             }
         }
@@ -210,10 +207,8 @@ namespace 屏幕工具
         {
             HotKeyDllHelper.UnregisterHotKey(Handle, CatchHotKeyID);
             HotKeyDllHelper.UnregisterHotKey(Handle, PasteHotKeyID);
-            HotKeyDllHelper.UnregisterHotKey(Handle, PickColorHotKeyKeyID);
             HotKeyDllHelper.UnregisterHotKey(Handle, OcrBasicHotKeyID);
             HotKeyDllHelper.UnregisterHotKey(Handle, OcrExcelHotKeyID);
-            HotKeyDllHelper.UnregisterHotKey(Handle, GifHotKeyID);
         }
 
         private void InitBaiduYun(string apiKey, string secretKey)
@@ -247,6 +242,7 @@ namespace 屏幕工具
 
         private void ShowForm()
         {
+            Console.WriteLine(this.Location.ToString());
             if (this.Visible == true)
             {
                 this.WindowState = FormWindowState.Minimized;
@@ -299,6 +295,11 @@ namespace 屏幕工具
         private void btn_screen_gif_Click(object sender, EventArgs e)
         {
             ShowScreenToGif();
+        }
+
+        private void btn_gif_compress_Click(object sender, EventArgs e)
+        {
+            ShowGifSicleTool();
         }
 
         private void btn_ocr_copy_Click(object sender, EventArgs e)
@@ -383,12 +384,19 @@ namespace 屏幕工具
             {
                 if (type == CatchType.CATCH)
                 {
+                    Console.WriteLine(this.Location.ToString() + "  " + this.Visible + "  " + this.WindowState);
                     isScreenShot = true;
                     mLastLocationX = this.Location.X;
                     mLastLocationY = this.Location.Y;
-                    this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
+                    if (this.Visible)
+                    {
+                        this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
+                    }
                     PrScrnDllHelper.PrScrn();
-                    this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);
+                    if (this.Visible)
+                    {
+                        this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);
+                    }
                     isScreenShot = false;
                     return;
                 }
@@ -458,6 +466,7 @@ namespace 屏幕工具
                 }
             }
         }
+
         //处理事件委托，设置截图状态
         public void SetisScreenShot(bool isScreenShot)
         {
@@ -847,9 +856,6 @@ namespace 屏幕工具
                 case PasteHotKeyID:
                     ScreenShot(CatchType.PASTE);
                     break;
-                case PickColorHotKeyKeyID:
-                    ShowPickColor();
-                    break;
                 case OcrBasicHotKeyID:
                     if (!isInit)
                     {
@@ -871,9 +877,6 @@ namespace 屏幕工具
                     {
                         ScreenShot(CatchType.OCR_EXCEL);
                     }
-                    break;
-                case GifHotKeyID:
-                    ShowScreenToGif();
                     break;
                 default:
                     break;
@@ -1225,6 +1228,22 @@ namespace 屏幕工具
                 this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
             }
             gif_main.ShowDialog();
+            if (this.Visible)
+            {
+                this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);
+            }
+        }
+
+        private void ShowGifSicleTool()
+        {
+            Form_gif_sicle_tool gif_sicle = new Form_gif_sicle_tool();
+            if (this.Visible)
+            {
+                mLastLocationX = this.Location.X;
+                mLastLocationY = this.Location.Y;
+                this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
+            }
+            gif_sicle.ShowDialog();
             if (this.Visible)
             {
                 this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);

@@ -1,15 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{51F5B263-0DF8-46AE-B1BB-A4AF0B12F69F}</ProjectGuid>
+    <ProjectGuid>{7E623DA5-9D5A-4A14-91F9-675E37336036}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>ScreenToGif</RootNamespace>
-    <AssemblyName>ScreenToGif</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <RootNamespace>GIFSicleTool</RootNamespace>
+    <AssemblyName>GIFSicleTool</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -32,7 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>gif.ico</ApplicationIcon>
+    <ApplicationIcon>gif_compress.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -47,24 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Encoding\AnimatedGifEncoder.cs" />
-    <Compile Include="Encoding\FrameInfo.cs" />
-    <Compile Include="Encoding\GifDecoder.cs" />
-    <Compile Include="Encoding\GifEncoder.cs" />
-    <Compile Include="Encoding\ImageUtil.cs" />
-    <Compile Include="Encoding\LzwEncoder.cs" />
-    <Compile Include="Encoding\NeuQuant.cs" />
-    <Compile Include="Encoding\PixelUtil.cs" />
-    <Compile Include="LibHelper\HotKeyDllHelper.cs" />
-    <Compile Include="LibHelper\System32DllHelper.cs" />
-    <Compile Include="UI\Form_gif_main.cs">
+    <Compile Include="Form_gif_sicle_tool.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="UI\Form_gif_main.Designer.cs">
-      <DependentUpon>Form_gif_main.cs</DependentUpon>
+    <Compile Include="Form_gif_sicle_tool.Designer.cs">
+      <DependentUpon>Form_gif_sicle_tool.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form_gif_sicle_tool.resx">
+      <DependentUpon>Form_gif_sicle_tool.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -73,10 +66,9 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="UI\Form_gif_main.resx">
-      <DependentUpon>Form_gif_main.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="app.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -88,10 +80,11 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="Resources\gifsicle.exe" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="gif.ico" />
+    <Content Include="gif_compress.ico" />
+    <None Include="Resources\gif_compress.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

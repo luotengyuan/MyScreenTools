@@ -47,15 +47,18 @@
             this.fPSToolStripMenuItem_16 = new System.Windows.Forms.ToolStripMenuItem();
             this.fPSToolStripMenuItem_33 = new System.Windows.Forms.ToolStripMenuItem();
             this.fPSToolStripMenuItem_50 = new System.Windows.Forms.ToolStripMenuItem();
-            this.fPSToolStripMenuItem_100 = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.自定义区域ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.全屏区域ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.捕获鼠标ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
+            this.压缩编码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.原始编码ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panel_btn_area = new System.Windows.Forms.Panel();
             this.panel_btn_area_2 = new System.Windows.Forms.Panel();
             this.btn_exit = new System.Windows.Forms.Button();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.panel_gif_area.SuspendLayout();
             this.panel_progress.SuspendLayout();
             this.cms_setting.SuspendLayout();
@@ -106,6 +109,7 @@
             this.btn_continue.Size = new System.Drawing.Size(38, 29);
             this.btn_continue.TabIndex = 1;
             this.btn_continue.Text = "录制";
+            this.toolTip.SetToolTip(this.btn_continue, "连续录制（Alt+Q）");
             this.btn_continue.UseVisualStyleBackColor = true;
             this.btn_continue.Click += new System.EventHandler(this.btn_continue_Click);
             // 
@@ -118,6 +122,7 @@
             this.btn_single.Size = new System.Drawing.Size(38, 29);
             this.btn_single.TabIndex = 2;
             this.btn_single.Text = "单帧";
+            this.toolTip.SetToolTip(this.btn_single, "单帧录制（Alt+W）");
             this.btn_single.UseVisualStyleBackColor = true;
             this.btn_single.Click += new System.EventHandler(this.btn_single_Click);
             // 
@@ -130,6 +135,7 @@
             this.btn_clean.Size = new System.Drawing.Size(38, 29);
             this.btn_clean.TabIndex = 3;
             this.btn_clean.Text = "清空";
+            this.toolTip.SetToolTip(this.btn_clean, "清空已录制数据");
             this.btn_clean.UseVisualStyleBackColor = true;
             this.btn_clean.Click += new System.EventHandler(this.btn_clean_Click);
             // 
@@ -142,6 +148,7 @@
             this.btn_setting.Size = new System.Drawing.Size(38, 29);
             this.btn_setting.TabIndex = 5;
             this.btn_setting.Text = "设置";
+            this.toolTip.SetToolTip(this.btn_setting, "设置录制参数");
             this.btn_setting.UseVisualStyleBackColor = true;
             this.btn_setting.Click += new System.EventHandler(this.btn_setting_Click);
             // 
@@ -154,6 +161,7 @@
             this.btn_copy.Size = new System.Drawing.Size(38, 29);
             this.btn_copy.TabIndex = 6;
             this.btn_copy.Text = "复制";
+            this.toolTip.SetToolTip(this.btn_copy, "复制GIF到剪切板");
             this.btn_copy.UseVisualStyleBackColor = true;
             this.btn_copy.Click += new System.EventHandler(this.btn_copy_Click);
             // 
@@ -166,6 +174,7 @@
             this.btn_save.Size = new System.Drawing.Size(38, 29);
             this.btn_save.TabIndex = 7;
             this.btn_save.Text = "保存";
+            this.toolTip.SetToolTip(this.btn_save, "保存GIF到文件");
             this.btn_save.UseVisualStyleBackColor = true;
             this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
             // 
@@ -178,9 +187,12 @@
             this.自定义区域ToolStripMenuItem,
             this.全屏区域ToolStripMenuItem,
             this.toolStripSeparator2,
-            this.捕获鼠标ToolStripMenuItem});
+            this.捕获鼠标ToolStripMenuItem,
+            this.toolStripSeparator3,
+            this.压缩编码ToolStripMenuItem,
+            this.原始编码ToolStripMenuItem});
             this.cms_setting.Name = "cms_setting";
-            this.cms_setting.Size = new System.Drawing.Size(137, 104);
+            this.cms_setting.Size = new System.Drawing.Size(137, 154);
             // 
             // 帧率ToolStripMenuItem
             // 
@@ -190,8 +202,7 @@
             this.fPSToolStripMenuItem_10,
             this.fPSToolStripMenuItem_16,
             this.fPSToolStripMenuItem_33,
-            this.fPSToolStripMenuItem_50,
-            this.fPSToolStripMenuItem_100});
+            this.fPSToolStripMenuItem_50});
             this.帧率ToolStripMenuItem.Name = "帧率ToolStripMenuItem";
             this.帧率ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.帧率ToolStripMenuItem.Text = "帧率";
@@ -199,51 +210,44 @@
             // fPSToolStripMenuItem_1
             // 
             this.fPSToolStripMenuItem_1.Name = "fPSToolStripMenuItem_1";
-            this.fPSToolStripMenuItem_1.Size = new System.Drawing.Size(121, 22);
+            this.fPSToolStripMenuItem_1.Size = new System.Drawing.Size(114, 22);
             this.fPSToolStripMenuItem_1.Text = "1 FPS";
             this.fPSToolStripMenuItem_1.Click += new System.EventHandler(this.fPSToolStripMenuItem_1_Click);
             // 
             // fPSToolStripMenuItem_5
             // 
             this.fPSToolStripMenuItem_5.Name = "fPSToolStripMenuItem_5";
-            this.fPSToolStripMenuItem_5.Size = new System.Drawing.Size(121, 22);
+            this.fPSToolStripMenuItem_5.Size = new System.Drawing.Size(114, 22);
             this.fPSToolStripMenuItem_5.Text = "5 FPS";
             this.fPSToolStripMenuItem_5.Click += new System.EventHandler(this.fPSToolStripMenuItem_5_Click);
             // 
             // fPSToolStripMenuItem_10
             // 
             this.fPSToolStripMenuItem_10.Name = "fPSToolStripMenuItem_10";
-            this.fPSToolStripMenuItem_10.Size = new System.Drawing.Size(121, 22);
+            this.fPSToolStripMenuItem_10.Size = new System.Drawing.Size(114, 22);
             this.fPSToolStripMenuItem_10.Text = "10 FPS";
             this.fPSToolStripMenuItem_10.Click += new System.EventHandler(this.fPSToolStripMenuItem_10_Click);
             // 
             // fPSToolStripMenuItem_16
             // 
             this.fPSToolStripMenuItem_16.Name = "fPSToolStripMenuItem_16";
-            this.fPSToolStripMenuItem_16.Size = new System.Drawing.Size(121, 22);
+            this.fPSToolStripMenuItem_16.Size = new System.Drawing.Size(114, 22);
             this.fPSToolStripMenuItem_16.Text = "16 FPS";
             this.fPSToolStripMenuItem_16.Click += new System.EventHandler(this.fPSToolStripMenuItem_16_Click);
             // 
             // fPSToolStripMenuItem_33
             // 
             this.fPSToolStripMenuItem_33.Name = "fPSToolStripMenuItem_33";
-            this.fPSToolStripMenuItem_33.Size = new System.Drawing.Size(121, 22);
+            this.fPSToolStripMenuItem_33.Size = new System.Drawing.Size(114, 22);
             this.fPSToolStripMenuItem_33.Text = "33 FPS";
             this.fPSToolStripMenuItem_33.Click += new System.EventHandler(this.fPSToolStripMenuItem_33_Click);
             // 
             // fPSToolStripMenuItem_50
             // 
             this.fPSToolStripMenuItem_50.Name = "fPSToolStripMenuItem_50";
-            this.fPSToolStripMenuItem_50.Size = new System.Drawing.Size(121, 22);
+            this.fPSToolStripMenuItem_50.Size = new System.Drawing.Size(114, 22);
             this.fPSToolStripMenuItem_50.Text = "50 FPS";
             this.fPSToolStripMenuItem_50.Click += new System.EventHandler(this.fPSToolStripMenuItem_50_Click);
-            // 
-            // fPSToolStripMenuItem_100
-            // 
-            this.fPSToolStripMenuItem_100.Name = "fPSToolStripMenuItem_100";
-            this.fPSToolStripMenuItem_100.Size = new System.Drawing.Size(121, 22);
-            this.fPSToolStripMenuItem_100.Text = "100 FPS";
-            this.fPSToolStripMenuItem_100.Click += new System.EventHandler(this.fPSToolStripMenuItem_100_Click);
             // 
             // toolStripSeparator1
             // 
@@ -275,6 +279,25 @@
             this.捕获鼠标ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.捕获鼠标ToolStripMenuItem.Text = "捕获鼠标";
             this.捕获鼠标ToolStripMenuItem.Click += new System.EventHandler(this.捕获鼠标ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator3
+            // 
+            this.toolStripSeparator3.Name = "toolStripSeparator3";
+            this.toolStripSeparator3.Size = new System.Drawing.Size(133, 6);
+            // 
+            // 压缩编码ToolStripMenuItem
+            // 
+            this.压缩编码ToolStripMenuItem.Name = "压缩编码ToolStripMenuItem";
+            this.压缩编码ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.压缩编码ToolStripMenuItem.Text = "压缩编码";
+            this.压缩编码ToolStripMenuItem.Click += new System.EventHandler(this.压缩编码ToolStripMenuItem_Click);
+            // 
+            // 原始编码ToolStripMenuItem
+            // 
+            this.原始编码ToolStripMenuItem.Name = "原始编码ToolStripMenuItem";
+            this.原始编码ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.原始编码ToolStripMenuItem.Text = "原始编码";
+            this.原始编码ToolStripMenuItem.Click += new System.EventHandler(this.原始编码ToolStripMenuItem_Click);
             // 
             // panel_btn_area
             // 
@@ -309,6 +332,7 @@
             this.btn_exit.Size = new System.Drawing.Size(38, 29);
             this.btn_exit.TabIndex = 8;
             this.btn_exit.Text = "退出";
+            this.toolTip.SetToolTip(this.btn_exit, "退出全屏模式");
             this.btn_exit.UseVisualStyleBackColor = true;
             this.btn_exit.Visible = false;
             this.btn_exit.Click += new System.EventHandler(this.btn_exit_Click);
@@ -324,6 +348,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form_gif_main";
             this.Text = "GIF录屏  999 x 766";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_gif_main_FormClosing);
             this.Load += new System.EventHandler(this.Form_gif_main_Load);
             this.LocationChanged += new System.EventHandler(this.Form_gif_main_LocationChanged);
             this.SizeChanged += new System.EventHandler(this.Form_gif_main_SizeChanged);
@@ -358,12 +383,15 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
         private System.Windows.Forms.ToolStripMenuItem 捕获鼠标ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fPSToolStripMenuItem_50;
-        private System.Windows.Forms.ToolStripMenuItem fPSToolStripMenuItem_100;
         private System.Windows.Forms.Panel panel_btn_area;
         private System.Windows.Forms.Button btn_exit;
         private System.Windows.Forms.Panel panel_btn_area_2;
         private System.Windows.Forms.Panel panel_progress;
         private System.Windows.Forms.ProgressBar pb_save;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
+        private System.Windows.Forms.ToolStripMenuItem 压缩编码ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 原始编码ToolStripMenuItem;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 

@@ -19,6 +19,7 @@ namespace ScreenToGif.UI
 {
     public partial class Form_gif_main : Form
     {
+
         #region 界面镂空参数方法
 
         private const uint WS_EX_LAYERED = 0x80000;//异形窗体特效的实现
@@ -124,7 +125,17 @@ namespace ScreenToGif.UI
         /// 录制帧计数（用于在临时目录中存放文件命名）
         /// </summary>
         private int _frameCount = 0;
+        /// <summary>
+        /// 是否拷贝到剪切板
+        /// </summary>
+        private bool isCopyMode = false;
+        private string copyPath = null;
 
+        #endregion
+
+        #region 快捷键相关参数
+        private const int KeyID_btn_continue = 1001;
+        private const int KeyID_btn_single = 102;
         #endregion
 
         #region 初始化方法
@@ -141,6 +152,12 @@ namespace ScreenToGif.UI
             InitTimer();
             CreateTemp();
             _addDel = AddFrames;
+            RegisterHotKey();
+        }
+
+        private void Form_gif_main_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            UnregisterHotKey();
         }
 
         private void Form_gif_main_SizeChanged(object sender, EventArgs e)
@@ -239,10 +256,6 @@ namespace ScreenToGif.UI
                     fPSToolStripMenuItem_50.CheckState = CheckState.Checked;
                     sltFpsToolStripMenuItem = fPSToolStripMenuItem_50;
                     break;
-                case 100:
-                    fPSToolStripMenuItem_100.CheckState = CheckState.Checked;
-                    sltFpsToolStripMenuItem = fPSToolStripMenuItem_100;
-                    break;
                 default:
                     gif_fps = 10;
                     fPSToolStripMenuItem_10.CheckState = CheckState.Checked;
@@ -264,6 +277,15 @@ namespace ScreenToGif.UI
             if (is_catch_mouse)
             {
                 捕获鼠标ToolStripMenuItem.CheckState = CheckState.Checked;
+            }
+            int encode_mode = Properties.Settings.Default.Setting_form_encode_mode;
+            if (encode_mode == 0)
+            {
+                压缩编码ToolStripMenuItem.CheckState = CheckState.Checked;
+            }
+            else
+            {
+                原始编码ToolStripMenuItem.CheckState = CheckState.Checked;
             }
         }
 
@@ -319,20 +341,7 @@ namespace ScreenToGif.UI
 
         private void btn_continue_Click(object sender, EventArgs e)
         {
-            if (!isRunning)
-            {
-                isRunning = true;
-                timer.Start();
-                btn_continue.Text = "暂停";
-                SetTitel();
-            }
-            else
-            {
-                isRunning = false;
-                timer.Stop();
-                btn_continue.Text = "继续";
-                SetTitel();
-            }
+            ContinueRecordStartOrPause();
         }
 
         private void btn_single_Click(object sender, EventArgs e)
@@ -342,17 +351,7 @@ namespace ScreenToGif.UI
 
         private void btn_clean_Click(object sender, EventArgs e)
         {
-            _listFrames.Clear();
-            if (!isRunning)
-            {
-                btn_continue.Text = "录制";
-            }
-            SetTitel();
-        }
-
-        private void btn_edit_Click(object sender, EventArgs e)
-        {
-
+            CleanAllFrames();
         }
 
         private void btn_setting_Click(object sender, EventArgs e)
@@ -373,18 +372,10 @@ namespace ScreenToGif.UI
                 return;
             }
             string temp_path = String.Format("{0}GIF_{1}.gif", _pathCopy, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
-            bool success = SaveGifToFile(temp_path);
-            if (success)
-            {
-                StringCollection files = new StringCollection();
-                files.Add(temp_path);
-                Clipboard.SetFileDropList(files);
-                MessageBox.Show("复制到剪切板成功");
-            }
-            else
-            {
-                MessageBox.Show("保存GIF文件失败");
-            }
+            isCopyMode = true;
+            copyPath = temp_path;
+            SaveGifToFile(temp_path);
+            
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -409,15 +400,8 @@ namespace ScreenToGif.UI
             savedialog.FileName = "GIF_" + DateTime.Now.ToString("yyyyMMdd_HHmmss");//设置默认文件名
             if (savedialog.ShowDialog() == DialogResult.OK)
             {
-                bool success = SaveGifToFile(savedialog.FileName);
-                if (success)
-                {
-                    MessageBox.Show("保存成功");
-                }
-                else
-                {
-                    MessageBox.Show("保存GIF文件失败");
-                }
+                isCopyMode = false;
+                SaveGifToFile(savedialog.FileName);
             }
 
         }
@@ -520,20 +504,6 @@ namespace ScreenToGif.UI
             }
         }
 
-        private void fPSToolStripMenuItem_100_Click(object sender, EventArgs e)
-        {
-            if (sltFpsToolStripMenuItem != fPSToolStripMenuItem_100)
-            {
-                sltFpsToolStripMenuItem.CheckState = CheckState.Unchecked;
-                fPSToolStripMenuItem_100.CheckState = CheckState.Checked;
-                sltFpsToolStripMenuItem = fPSToolStripMenuItem_100;
-                gif_fps = 100;
-                Properties.Settings.Default.Setting_gif_fps = gif_fps;
-                Properties.Settings.Default.Save();
-                timer.Interval = 1000 / gif_fps;
-            }
-        }
-
         private void 自定义区域ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExitFullScreen();
@@ -557,6 +527,22 @@ namespace ScreenToGif.UI
                 is_catch_mouse = true;
             }
             Properties.Settings.Default.Setting_is_catch_mouse = is_catch_mouse;
+            Properties.Settings.Default.Save();
+        }
+
+        private void 压缩编码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            压缩编码ToolStripMenuItem.CheckState = CheckState.Checked;
+            原始编码ToolStripMenuItem.CheckState = CheckState.Unchecked;
+            Properties.Settings.Default.Setting_form_encode_mode = 0;
+            Properties.Settings.Default.Save();
+        }
+
+        private void 原始编码ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            压缩编码ToolStripMenuItem.CheckState = CheckState.Unchecked;
+            原始编码ToolStripMenuItem.CheckState = CheckState.Checked;
+            Properties.Settings.Default.Setting_form_encode_mode = 1;
             Properties.Settings.Default.Save();
         }
 
@@ -609,7 +595,7 @@ namespace ScreenToGif.UI
                     cursorInfo.cbSize = Marshal.SizeOf(typeof(CursorInfo));
                     System32DllHelper.GetCursorInfo(out cursorInfo);
                     System.Windows.Forms.Cursor cur = new System.Windows.Forms.Cursor(cursorInfo.hCursor);
-                    cur.Draw(gs, new Rectangle(cursorInfo.ptScreenPos.X - GetScaleSize(gif_area_location.X), cursorInfo.ptScreenPos.Y - GetScaleSize(gif_area_location.Y), cur.Size.Width, cur.Size.Height));
+                    cur.Draw(gs, new Rectangle(GetScaleSize(cursorInfo.ptScreenPos.X) - GetScaleSize(gif_area_location.X), GetScaleSize(cursorInfo.ptScreenPos.Y) - GetScaleSize(gif_area_location.Y), cur.Size.Width, cur.Size.Height));
                 }
             }
             _addDel.BeginInvoke(String.Format("{0}{1}.bmp", _pathTemp, _frameCount), originBmp, CallBack, null);
@@ -620,6 +606,27 @@ namespace ScreenToGif.UI
         #endregion
 
         #region 公共方法
+
+        /// <summary>
+        /// 连续录制开始或暂停
+        /// </summary>
+        private void ContinueRecordStartOrPause()
+        {
+            if (!isRunning)
+            {
+                isRunning = true;
+                timer.Start();
+                btn_continue.Text = "暂停";
+                SetTitel();
+            }
+            else
+            {
+                isRunning = false;
+                timer.Stop();
+                btn_continue.Text = "继续";
+                SetTitel();
+            }
+        }
 
         /// <summary>
         /// 设置镂空界面
@@ -668,48 +675,214 @@ namespace ScreenToGif.UI
             }
         }
 
+        private void bgw_save_DoWork(object sender, DoWorkEventArgs e)
+        {
+            var bgworker = sender as BackgroundWorker;
+            //获取从RunWorkerAsync（）方法里面传递的参数的值
+            string path = (string) e.Argument;
+            bool ret = false;
+
+            if (压缩编码ToolStripMenuItem.CheckState == CheckState.Checked)
+            {
+                #region Ngif encoding
+
+                int numImage = 0;
+
+                #region Paint Unchanged Pixels
+
+                var listToEncode = new List<FrameInfo>();
+
+                bool paintTransparent = true;
+
+                if (paintTransparent)//Settings.Default.paintTransparent)
+                {
+                    listToEncode = ImageUtil.PaintTransparentAndCut(_listFrames, Color.LawnGreen, bgworker);
+                }
+
+                #endregion
+
+                using (var _encoder = new AnimatedGifEncoder())
+                {
+                    _encoder.Start(path);
+                    _encoder.SetQuality(10);
+                    _encoder.SetRepeat(0); // 0 = Always, -1 once
+
+                    #region For Each Frame
+
+                    try
+                    {
+                        if (paintTransparent)
+                        {
+                            #region With Transparency
+
+                            _encoder.SetTransparent(Color.LawnGreen);
+                            _encoder.SetDispose(1); //Undraw Method, "Leave".
+
+                            foreach (FrameInfo image in listToEncode)
+                            {
+                                var bitmapAux = new Bitmap(image.Image);
+
+                                _encoder.SetDelay(1000 / gif_fps);
+                                _encoder.AddFrame(bitmapAux, image.PositionTopLeft.X, image.PositionTopLeft.Y);
+
+                                bitmapAux.Dispose();
+                                numImage++;
+                                bgworker.ReportProgress(numImage);
+                            }
+
+                            #endregion
+                        }
+                        else
+                        {
+                            #region Without
+                            foreach (var image in _listFrames)
+                            {
+                                _encoder.SetDelay(1000 / gif_fps);
+                                _encoder.AddFrame(image.From());
+                                numImage++;
+                                bgworker.ReportProgress(numImage);
+                            }
+
+                            #endregion
+                        }
+                        ret = true;
+
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine("Error in the Ngif encoding." + ex.ToString());
+                    }
+
+                    #endregion
+                }
+
+                #region Clean Speciffic Variables
+
+                listToEncode.Clear();
+                listToEncode = null;
+
+                #endregion
+
+                #endregion
+            }
+            else
+            {
+
+                using (var stream = new MemoryStream())
+                {
+                    using (var encoderNet = new GifEncoder(stream, null, null, 0))
+                    {
+                        for (int i = 0; i < _listFrames.Count; i++)
+                        {
+                            var bitmapAux = new Bitmap(_listFrames[i]);
+                            encoderNet.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(1000 / gif_fps));
+                            bitmapAux.Dispose();
+                            bgworker.ReportProgress(i + 1);
+                        }
+                    }
+
+                    stream.Position = 0;
+
+                    try
+                    {
+                        using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 0x2000, false))
+                        {
+                            stream.WriteTo(fileStream);
+                        }
+                        ret = true;
+                    }
+                    catch (Exception)
+                    {
+                    }
+                }
+            }
+            e.Result = ret;
+        }
+
+        private void bgw_save_ProgressChanged(object sender, ProgressChangedEventArgs e)
+        {
+            pb_save.Value = e.ProgressPercentage;
+        }
+
+        private void bgw_save_Completed(object sender, RunWorkerCompletedEventArgs e)
+        {
+            UpdateSaveStatusView(false);
+            if (isCopyMode)
+            {
+                if ((bool)e.Result)
+                {
+                    StringCollection files = new StringCollection();
+                    files.Add(copyPath);
+                    Clipboard.SetFileDropList(files);
+                    if (压缩编码ToolStripMenuItem.CheckState == CheckState.Checked)
+                    {
+                        CleanAllFrames();
+                    }
+                    MessageBox.Show("复制到剪切板成功");
+                }
+                else
+                {
+                    MessageBox.Show("保存GIF文件失败");
+                }
+            }
+            else
+            {
+                if ((bool)e.Result)
+                {
+                    if (压缩编码ToolStripMenuItem.CheckState == CheckState.Checked)
+                    {
+                        CleanAllFrames();
+                    }
+                    MessageBox.Show("保存成功");
+                }
+                else
+                {
+                    MessageBox.Show("保存GIF文件失败");
+                }
+            }
+
+
+        }
+
         /// <summary>
         /// 保存GIF到图片
         /// </summary>
         /// <param name="path"></param>
         /// <returns></returns>
-        private bool SaveGifToFile(string path)
+        private void SaveGifToFile(string path)
         {
-            panel_progress.Visible = true;
-            using (var stream = new MemoryStream())
+            UpdateSaveStatusView(true);
+            int count = _listFrames.Count;
+            pb_save.Maximum = count;
+            pb_save.Value = 0;
+            BackgroundWorker bgw_save = new BackgroundWorker();
+            bgw_save.WorkerReportsProgress = true;
+            bgw_save.DoWork += bgw_save_DoWork;
+            bgw_save.ProgressChanged += bgw_save_ProgressChanged;
+            bgw_save.RunWorkerCompleted += bgw_save_Completed;
+            bgw_save.RunWorkerAsync(path);
+        }
+
+        private void UpdateSaveStatusView(bool isSaving)
+        {
+            panel_progress.Visible = isSaving;
+            btn_continue.Enabled = !isSaving;
+            btn_single.Enabled = !isSaving;
+            btn_clean.Enabled = !isSaving;
+            btn_setting.Enabled = !isSaving;
+            btn_copy.Enabled = !isSaving;
+            btn_save.Enabled = !isSaving;
+            btn_exit.Enabled = !isSaving;
+        }
+
+        private void CleanAllFrames()
+        {
+            _listFrames.Clear();
+            if (!isRunning)
             {
-                using (var encoderNet = new GifEncoder(stream, null, null, 0))
-                {
-                    int count = _listFrames.Count;
-                    pb_save.Maximum = count;
-                    pb_save.Value = 0;
-                    for (int i = 0; i < count; i++)
-                    {
-                        var bitmapAux = new Bitmap(_listFrames[i]);
-                        encoderNet.AddFrame(bitmapAux, 0, 0, TimeSpan.FromMilliseconds(1000 / gif_fps));
-                        bitmapAux.Dispose();
-                        pb_save.Value = i + 1;
-                    }
-                }
-
-                stream.Position = 0;
-
-                try
-                {
-                    using (var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 0x2000, false))
-                    {
-                        stream.WriteTo(fileStream);
-                    }
-                    panel_progress.Visible = false;
-                    return true;
-                }
-                catch (Exception ex)
-                {
-                    //LogWriter.Log(ex, "Error while writing to disk.");
-                }
+                btn_continue.Text = "录制";
             }
-            panel_progress.Visible = false;
-            return false;
+            SetTitel();
         }
 
         /// <summary>
@@ -819,6 +992,61 @@ namespace ScreenToGif.UI
         private int GetScaleSize(int size)
         {
             return (int)(size * scale);
+        }
+
+        #endregion
+
+        #region 快捷键注册注销
+
+        /// <summary>
+        /// 注册快捷键
+        /// </summary>
+        private void RegisterHotKey()
+        {
+            bool isRegistered_continue = HotKeyDllHelper.RegisterHotKey(Handle, KeyID_btn_continue, 0x0001, 81);
+            bool isRegistered_single = HotKeyDllHelper.RegisterHotKey(Handle, KeyID_btn_single, 0x0001, 87);
+            if (!isRegistered_continue && !isRegistered_single)
+            {
+                MessageBox.Show("连续录制（Alt+Q）和单帧录制（Alt+W）快捷键设置失败");
+            }
+            else if (!isRegistered_continue)
+            {
+                MessageBox.Show("连续录制（Alt+Q）快捷键设置失败");
+            }
+            else if (!isRegistered_single)
+            {
+                MessageBox.Show("单帧录制（Alt+W）快捷键设置失败");
+            }
+        }
+
+        /// <summary>
+        /// 注销快捷键
+        /// </summary>
+        private void UnregisterHotKey()
+        {
+            HotKeyDllHelper.UnregisterHotKey(Handle, KeyID_btn_continue);
+            HotKeyDllHelper.UnregisterHotKey(Handle, KeyID_btn_single);
+        }
+
+        #endregion
+
+        #region 快捷键响应
+
+        //重载WndProc窗口事件方法，以响应快捷键
+        protected override void WndProc(ref Message m)
+        {
+            switch (m.WParam.ToInt32())
+            {
+                case KeyID_btn_continue:
+                    ContinueRecordStartOrPause();
+                    break;
+                case KeyID_btn_single:
+                    AddBitmapToList();
+                    break;
+                default:
+                    break;
+            }
+            base.WndProc(ref m);
         }
 
         #endregion

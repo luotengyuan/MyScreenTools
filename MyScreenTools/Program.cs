@@ -56,7 +56,7 @@ namespace 屏幕工具
             //    //创建启动对象
             //    System.Diagnostics.ProcessStartInfo startInfo = new System.Diagnostics.ProcessStartInfo();
             //    startInfo.UseShellExecute = true;
-            //    startInfo.WorkingDirectory = Environment.CurrentDirectory;
+            //    startInfo.WorkingDirectory = System.AppDomain.CurrentDomain.BaseDirectory;
             //    startInfo.FileName = Application.ExecutablePath;
             //    //设置启动动作,确保以管理员身份运行
             //    startInfo.Verb = "runas";

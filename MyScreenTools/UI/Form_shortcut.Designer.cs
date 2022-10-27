@@ -38,10 +38,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.btn_color = new System.Windows.Forms.Button();
-            this.tb_pick_color_key = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.btn_paste_set = new System.Windows.Forms.Button();
             this.tb_paste_key = new System.Windows.Forms.TextBox();
@@ -50,10 +46,6 @@
             this.btn_ocr_excel_set = new System.Windows.Forms.Button();
             this.tb_ocr_excel_key = new System.Windows.Forms.TextBox();
             this.label11 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.btn_gif = new System.Windows.Forms.Button();
-            this.tb_gif_key = new System.Windows.Forms.TextBox();
-            this.label13 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // btn_catch_set
@@ -68,7 +60,7 @@
             // 
             // tb_ocr_basic_key
             // 
-            this.tb_ocr_basic_key.Location = new System.Drawing.Point(183, 51);
+            this.tb_ocr_basic_key.Location = new System.Drawing.Point(183, 81);
             this.tb_ocr_basic_key.Name = "tb_ocr_basic_key";
             this.tb_ocr_basic_key.ReadOnly = true;
             this.tb_ocr_basic_key.Size = new System.Drawing.Size(57, 21);
@@ -90,7 +82,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(47, 54);
+            this.label2.Location = new System.Drawing.Point(47, 84);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(65, 12);
             this.label2.TabIndex = 6;
@@ -107,7 +99,7 @@
             // 
             // btn_ocr_basic_set
             // 
-            this.btn_ocr_basic_set.Location = new System.Drawing.Point(267, 49);
+            this.btn_ocr_basic_set.Location = new System.Drawing.Point(267, 79);
             this.btn_ocr_basic_set.Name = "btn_ocr_basic_set";
             this.btn_ocr_basic_set.Size = new System.Drawing.Size(74, 23);
             this.btn_ocr_basic_set.TabIndex = 10;
@@ -127,7 +119,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(136, 54);
+            this.label4.Location = new System.Drawing.Point(136, 84);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(41, 12);
             this.label4.TabIndex = 12;
@@ -137,54 +129,16 @@
             // 
             this.label5.AutoSize = true;
             this.label5.ForeColor = System.Drawing.Color.Red;
-            this.label5.Location = new System.Drawing.Point(81, 203);
+            this.label5.Location = new System.Drawing.Point(81, 149);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(221, 12);
             this.label5.TabIndex = 13;
             this.label5.Text = "注意：目前仅支持Alt+单个字母的组合键";
             // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(136, 141);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(41, 12);
-            this.label6.TabIndex = 17;
-            this.label6.Text = "Alt + ";
-            // 
-            // btn_color
-            // 
-            this.btn_color.Location = new System.Drawing.Point(267, 136);
-            this.btn_color.Name = "btn_color";
-            this.btn_color.Size = new System.Drawing.Size(74, 23);
-            this.btn_color.TabIndex = 16;
-            this.btn_color.Text = "设置";
-            this.btn_color.UseVisualStyleBackColor = true;
-            this.btn_color.Click += new System.EventHandler(this.btn_color_Click);
-            // 
-            // tb_pick_color_key
-            // 
-            this.tb_pick_color_key.Location = new System.Drawing.Point(183, 138);
-            this.tb_pick_color_key.Name = "tb_pick_color_key";
-            this.tb_pick_color_key.ReadOnly = true;
-            this.tb_pick_color_key.Size = new System.Drawing.Size(57, 21);
-            this.tb_pick_color_key.TabIndex = 15;
-            this.tb_pick_color_key.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tb_pick_color_key.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tb_pick_color_key_KeyUp);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(47, 141);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(65, 12);
-            this.label7.TabIndex = 14;
-            this.label7.Text = "屏幕取色：";
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(136, 112);
+            this.label8.Location = new System.Drawing.Point(136, 55);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(41, 12);
             this.label8.TabIndex = 21;
@@ -192,7 +146,7 @@
             // 
             // btn_paste_set
             // 
-            this.btn_paste_set.Location = new System.Drawing.Point(267, 107);
+            this.btn_paste_set.Location = new System.Drawing.Point(267, 50);
             this.btn_paste_set.Name = "btn_paste_set";
             this.btn_paste_set.Size = new System.Drawing.Size(74, 23);
             this.btn_paste_set.TabIndex = 20;
@@ -202,7 +156,7 @@
             // 
             // tb_paste_key
             // 
-            this.tb_paste_key.Location = new System.Drawing.Point(183, 107);
+            this.tb_paste_key.Location = new System.Drawing.Point(183, 50);
             this.tb_paste_key.Name = "tb_paste_key";
             this.tb_paste_key.ReadOnly = true;
             this.tb_paste_key.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -214,7 +168,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(71, 112);
+            this.label9.Location = new System.Drawing.Point(71, 55);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(41, 12);
             this.label9.TabIndex = 18;
@@ -223,7 +177,7 @@
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(136, 83);
+            this.label10.Location = new System.Drawing.Point(136, 113);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(41, 12);
             this.label10.TabIndex = 25;
@@ -231,7 +185,7 @@
             // 
             // btn_ocr_excel_set
             // 
-            this.btn_ocr_excel_set.Location = new System.Drawing.Point(267, 78);
+            this.btn_ocr_excel_set.Location = new System.Drawing.Point(267, 108);
             this.btn_ocr_excel_set.Name = "btn_ocr_excel_set";
             this.btn_ocr_excel_set.Size = new System.Drawing.Size(74, 23);
             this.btn_ocr_excel_set.TabIndex = 24;
@@ -241,7 +195,7 @@
             // 
             // tb_ocr_excel_key
             // 
-            this.tb_ocr_excel_key.Location = new System.Drawing.Point(183, 80);
+            this.tb_ocr_excel_key.Location = new System.Drawing.Point(183, 110);
             this.tb_ocr_excel_key.Name = "tb_ocr_excel_key";
             this.tb_ocr_excel_key.ReadOnly = true;
             this.tb_ocr_excel_key.Size = new System.Drawing.Size(57, 21);
@@ -252,59 +206,17 @@
             // label11
             // 
             this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(47, 83);
+            this.label11.Location = new System.Drawing.Point(47, 113);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(65, 12);
             this.label11.TabIndex = 22;
             this.label11.Text = "表格识别：";
             // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(136, 170);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(41, 12);
-            this.label12.TabIndex = 29;
-            this.label12.Text = "Alt + ";
-            // 
-            // btn_gif
-            // 
-            this.btn_gif.Location = new System.Drawing.Point(267, 165);
-            this.btn_gif.Name = "btn_gif";
-            this.btn_gif.Size = new System.Drawing.Size(74, 23);
-            this.btn_gif.TabIndex = 28;
-            this.btn_gif.Text = "设置";
-            this.btn_gif.UseVisualStyleBackColor = true;
-            this.btn_gif.Click += new System.EventHandler(this.btn_gif_Click);
-            // 
-            // tb_gif_key
-            // 
-            this.tb_gif_key.Location = new System.Drawing.Point(183, 167);
-            this.tb_gif_key.Name = "tb_gif_key";
-            this.tb_gif_key.ReadOnly = true;
-            this.tb_gif_key.Size = new System.Drawing.Size(57, 21);
-            this.tb_gif_key.TabIndex = 27;
-            this.tb_gif_key.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.tb_gif_key.KeyUp += new System.Windows.Forms.KeyEventHandler(this.tb_gif_key_KeyUp);
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(53, 170);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(59, 12);
-            this.label13.TabIndex = 26;
-            this.label13.Text = "GIF录屏：";
-            // 
             // Form_shortcut
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(398, 234);
-            this.Controls.Add(this.label12);
-            this.Controls.Add(this.btn_gif);
-            this.Controls.Add(this.tb_gif_key);
-            this.Controls.Add(this.label13);
+            this.ClientSize = new System.Drawing.Size(398, 178);
             this.Controls.Add(this.label10);
             this.Controls.Add(this.btn_ocr_excel_set);
             this.Controls.Add(this.tb_ocr_excel_key);
@@ -313,10 +225,6 @@
             this.Controls.Add(this.btn_paste_set);
             this.Controls.Add(this.tb_paste_key);
             this.Controls.Add(this.label9);
-            this.Controls.Add(this.label6);
-            this.Controls.Add(this.btn_color);
-            this.Controls.Add(this.tb_pick_color_key);
-            this.Controls.Add(this.label7);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -349,10 +257,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.Button btn_color;
-        private System.Windows.Forms.TextBox tb_pick_color_key;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btn_paste_set;
         private System.Windows.Forms.TextBox tb_paste_key;
@@ -361,9 +265,5 @@
         private System.Windows.Forms.Button btn_ocr_excel_set;
         private System.Windows.Forms.TextBox tb_ocr_excel_key;
         private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Button btn_gif;
-        private System.Windows.Forms.TextBox tb_gif_key;
-        private System.Windows.Forms.Label label13;
     }
 }

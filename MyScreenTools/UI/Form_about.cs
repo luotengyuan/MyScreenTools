@@ -18,7 +18,7 @@ namespace 屏幕工具
             InitializeComponent();
             lb_version.Text = "V" + System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
             lb_author.Text = "Lois（QQ：234808404）";
-            string path = Environment.CurrentDirectory + "\\Readme.txt";
+            string path = System.AppDomain.CurrentDomain.BaseDirectory + "\\Readme.txt";
             StreamReader sr = new StreamReader(path, Encoding.Default);
             string content;
             while ((content = sr.ReadLine()) != null)

@@ -106,5 +106,17 @@ namespace ScreenToGif.Properties {
                 this["Setting_form_location"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int Setting_form_encode_mode {
+            get {
+                return ((int)(this["Setting_form_encode_mode"]));
+            }
+            set {
+                this["Setting_form_encode_mode"] = value;
+            }
+        }
     }
 }

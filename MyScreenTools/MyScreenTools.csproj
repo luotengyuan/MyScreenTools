@@ -233,6 +233,10 @@
       <Project>{f8d030e9-2cfd-499b-b87f-80f8e2c57aa1}</Project>
       <Name>CommonLibrary</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GIFSicleTool\GIFSicleTool.csproj">
+      <Project>{7e623da5-9d5a-4a14-91f9-675e37336036}</Project>
+      <Name>GIFSicleTool</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScreenColorPicker\ScreenColorPicker.csproj">
       <Project>{272d703b-b7a7-4993-8690-23390223d736}</Project>
       <Name>ScreenColorPicker</Name>
