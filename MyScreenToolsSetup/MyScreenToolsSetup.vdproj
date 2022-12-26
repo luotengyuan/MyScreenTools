@@ -15,6 +15,12 @@
     {
         "Entry"
         {
+        "MsmKey" = "8:_1D32F56C1B252A478C3C04859913B65C"
+        "OwnerKey" = "8:_CFF3DA1AAA614BD2A011C3DBD0047C5F"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_341DEB459F50498CA25B8D73B712218D"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
@@ -40,6 +46,12 @@
         "Entry"
         {
         "MsmKey" = "8:_503A1052FEB7492BBB5866189CB702A6"
+        "OwnerKey" = "8:_UNDEFINED"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_537F637D304C43DC989DC2AD02778269"
         "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -142,7 +154,7 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_CF4AB7CC694F409C96D0F8AA7029ED3B"
+        "OwnerKey" = "8:_537F637D304C43DC989DC2AD02778269"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -161,6 +173,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_39B7A6C5448EE79ED2673600532BF4AB"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_1D32F56C1B252A478C3C04859913B65C"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -185,6 +203,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_668C90BAB3F747D60E82EF82A968B05C"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_CF4AB7CC694F409C96D0F8AA7029ED3B"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -312,6 +336,37 @@
         }
         "File"
         {
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_1D32F56C1B252A478C3C04859913B65C"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ScreenTextPaster, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_1D32F56C1B252A478C3C04859913B65C"
+                    {
+                    "Name" = "8:ScreenTextPaster.EXE"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:ScreenTextPaster.EXE"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_CF7372A37DC64E8995F24FA282894F21"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
             "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_341DEB459F50498CA25B8D73B712218D"
             {
             "AssemblyRegister" = "3:1"
@@ -429,6 +484,37 @@
             {
             "SourcePath" = "8:..\\MyScreenTools\\App.ico"
             "TargetName" = "8:App.ico"
+            "Tag" = "8:"
+            "Folder" = "8:_CF7372A37DC64E8995F24FA282894F21"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_537F637D304C43DC989DC2AD02778269"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:ScreenTextPaster, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_537F637D304C43DC989DC2AD02778269"
+                    {
+                    "Name" = "8:ScreenTextPaster.exe"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:..\\MyScreenTools\\bin\\Debug\\ScreenTextPaster.exe"
+            "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_CF7372A37DC64E8995F24FA282894F21"
             "Condition" = "8:"
@@ -748,7 +834,7 @@
             {
             "AssemblyRegister" = "3:1"
             "AssemblyIsInGAC" = "11:FALSE"
-            "AssemblyAsmDisplayName" = "8:屏幕工具, Version=2.2.0.0, Culture=neutral, processorArchitecture=MSIL"
+            "AssemblyAsmDisplayName" = "8:屏幕工具, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
                     "_CFF3DA1AAA614BD2A011C3DBD0047C5F"

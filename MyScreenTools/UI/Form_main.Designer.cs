@@ -41,6 +41,10 @@
             this.文字识别服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.机器翻译服务ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.快捷键设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.截图设置ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.复制图像内容到剪切板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.复制图像路径到剪切板ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.关于ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.关于我们ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
@@ -81,6 +85,7 @@
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.btn_gif_compress = new System.Windows.Forms.Button();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.btn_text_paster = new System.Windows.Forms.Button();
             this.menuStrip_main.SuspendLayout();
             this.groupBox3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -150,7 +155,8 @@
             this.关于ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.开机启动ToolStripMenuItem,
             this.百度云设置ToolStripMenuItem,
-            this.快捷键设置ToolStripMenuItem});
+            this.快捷键设置ToolStripMenuItem,
+            this.截图设置ToolStripMenuItem});
             this.关于ToolStripMenuItem.Name = "关于ToolStripMenuItem";
             this.关于ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
             this.关于ToolStripMenuItem.Text = "设置";
@@ -194,6 +200,38 @@
             this.快捷键设置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
             this.快捷键设置ToolStripMenuItem.Text = "快捷键设置";
             this.快捷键设置ToolStripMenuItem.Click += new System.EventHandler(this.快捷键设置ToolStripMenuItem_Click);
+            // 
+            // 截图设置ToolStripMenuItem
+            // 
+            this.截图设置ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.复制图像内容到剪切板ToolStripMenuItem,
+            this.复制图像路径到剪切板ToolStripMenuItem,
+            this.toolStripSeparator1});
+            this.截图设置ToolStripMenuItem.Image = global::屏幕工具.Properties.Resources.设置;
+            this.截图设置ToolStripMenuItem.Name = "截图设置ToolStripMenuItem";
+            this.截图设置ToolStripMenuItem.Size = new System.Drawing.Size(136, 22);
+            this.截图设置ToolStripMenuItem.Text = "截图设置";
+            // 
+            // 复制图像内容到剪切板ToolStripMenuItem
+            // 
+            this.复制图像内容到剪切板ToolStripMenuItem.Image = global::屏幕工具.Properties.Resources.选择框_选中;
+            this.复制图像内容到剪切板ToolStripMenuItem.Name = "复制图像内容到剪切板ToolStripMenuItem";
+            this.复制图像内容到剪切板ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.复制图像内容到剪切板ToolStripMenuItem.Text = "复制图像内容到剪切板";
+            this.复制图像内容到剪切板ToolStripMenuItem.Click += new System.EventHandler(this.复制图像内容到剪切板ToolStripMenuItem_Click);
+            // 
+            // 复制图像路径到剪切板ToolStripMenuItem
+            // 
+            this.复制图像路径到剪切板ToolStripMenuItem.Image = global::屏幕工具.Properties.Resources.选择框_未选;
+            this.复制图像路径到剪切板ToolStripMenuItem.Name = "复制图像路径到剪切板ToolStripMenuItem";
+            this.复制图像路径到剪切板ToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
+            this.复制图像路径到剪切板ToolStripMenuItem.Text = "复制图像路径到剪切板";
+            this.复制图像路径到剪切板ToolStripMenuItem.Click += new System.EventHandler(this.复制图像路径到剪切板ToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(193, 6);
             // 
             // 关于ToolStripMenuItem1
             // 
@@ -285,6 +323,7 @@
             this.btn_screen_gif.Size = new System.Drawing.Size(86, 27);
             this.btn_screen_gif.TabIndex = 5;
             this.btn_screen_gif.Text = "GIF录屏";
+            this.toolTip.SetToolTip(this.btn_screen_gif, "将屏幕操作录制成GIF动图");
             this.btn_screen_gif.UseVisualStyleBackColor = false;
             this.btn_screen_gif.Click += new System.EventHandler(this.btn_screen_gif_Click);
             // 
@@ -297,6 +336,7 @@
             this.btn_color.Size = new System.Drawing.Size(86, 27);
             this.btn_color.TabIndex = 2;
             this.btn_color.Text = "屏幕取色";
+            this.toolTip.SetToolTip(this.btn_color, "提取屏幕中某个像素点的颜色值");
             this.btn_color.UseVisualStyleBackColor = false;
             this.btn_color.Click += new System.EventHandler(this.btn_color_Click);
             // 
@@ -459,7 +499,7 @@
             this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(720, 179);
+            this.groupBox2.Size = new System.Drawing.Size(720, 182);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "翻译";
@@ -558,7 +598,7 @@
             this.tb_translate_result.Multiline = true;
             this.tb_translate_result.Name = "tb_translate_result";
             this.tb_translate_result.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_translate_result.Size = new System.Drawing.Size(712, 133);
+            this.tb_translate_result.Size = new System.Drawing.Size(712, 136);
             this.tb_translate_result.TabIndex = 1;
             // 
             // contextMenuStrip_notify
@@ -637,6 +677,7 @@
             // 
             this.groupBox4.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.groupBox4.Controls.Add(this.btn_text_paster);
             this.groupBox4.Controls.Add(this.btn_gif_compress);
             this.groupBox4.Controls.Add(this.btn_screen_gif);
             this.groupBox4.Controls.Add(this.btn_color);
@@ -656,8 +697,22 @@
             this.btn_gif_compress.Size = new System.Drawing.Size(86, 27);
             this.btn_gif_compress.TabIndex = 6;
             this.btn_gif_compress.Text = "GIF压缩";
+            this.toolTip.SetToolTip(this.btn_gif_compress, "对GIF图像进行压缩和其他操作");
             this.btn_gif_compress.UseVisualStyleBackColor = false;
             this.btn_gif_compress.Click += new System.EventHandler(this.btn_gif_compress_Click);
+            // 
+            // btn_text_paster
+            // 
+            this.btn_text_paster.BackColor = System.Drawing.SystemColors.Control;
+            this.btn_text_paster.Location = new System.Drawing.Point(4, 112);
+            this.btn_text_paster.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_text_paster.Name = "btn_text_paster";
+            this.btn_text_paster.Size = new System.Drawing.Size(86, 27);
+            this.btn_text_paster.TabIndex = 7;
+            this.btn_text_paster.Text = "贴文字";
+            this.toolTip.SetToolTip(this.btn_text_paster, "将文字张贴到置顶窗口，方便操作。");
+            this.btn_text_paster.UseVisualStyleBackColor = false;
+            this.btn_text_paster.Click += new System.EventHandler(this.btn_text_paster_Click);
             // 
             // Form_main
             // 
@@ -752,6 +807,11 @@
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.Button btn_gif_compress;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.ToolStripMenuItem 截图设置ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 复制图像内容到剪切板ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 复制图像路径到剪切板ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.Button btn_text_paster;
 
     }
 }

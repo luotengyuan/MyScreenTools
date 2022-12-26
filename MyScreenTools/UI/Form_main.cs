@@ -22,6 +22,8 @@ using ScreenToGif.UI;
 using ScreenColorPicker.UI;
 using CommonLibrary;
 using GIFSicleTool;
+using System.Collections.Specialized;
+using ScreenTextPaster;
 
 namespace 屏幕工具
 {
@@ -47,6 +49,9 @@ namespace 屏幕工具
         private bool is_translate_to_init = false;
 
         private bool is_auto_start = false;
+        private bool is_copy_image_path = false;
+
+        private string CONFIG_PATH = System.AppDomain.CurrentDomain.BaseDirectory + "\\config.ini";
 
         #endregion
 
@@ -102,12 +107,59 @@ namespace 屏幕工具
             AutoStart(is_auto_start);
             //MessageBox.Show("AutoStart = " + is_auto_start);
 
+            // 是否拷贝文件路径
+            is_copy_image_path = Properties.Settings.Default.CopyImagePath;
+            if (is_copy_image_path)
+            {
+                复制图像路径到剪切板ToolStripMenuItem.Image = Properties.Resources.选择框_选中;
+                复制图像内容到剪切板ToolStripMenuItem.Image = Properties.Resources.选择框_未选;
+            }
+            else
+            {
+                复制图像路径到剪切板ToolStripMenuItem.Image = Properties.Resources.选择框_未选;
+                复制图像内容到剪切板ToolStripMenuItem.Image = Properties.Resources.选择框_选中;
+            }
+
         }
 
         private void Form_main_Load(object sender, EventArgs e)
         {
             //splitContainer1.Panel2Collapsed = !splitContainer1.Panel2Collapsed;
-            InitBaiduYun(Properties.Settings.Default.OCRApiKey, Properties.Settings.Default.OCRSecretKey, false);
+            string ocr_api_key = Properties.Settings.Default.OCRApiKey;
+            string ocr_secret_key = Properties.Settings.Default.OCRSecretKey;
+            if ((ocr_api_key == null || ocr_api_key.Trim().Length <= 0) && (ocr_secret_key == null || ocr_secret_key.Trim().Length <= 0) && System.IO.File.Exists(CONFIG_PATH))
+            {
+                string ocr_api_key_config = IniConfigUtils.GetValue("BaiduYunOCR", "ApiKey", null, CONFIG_PATH);
+                string ocr_secret_key_config = IniConfigUtils.GetValue("BaiduYunOCR", "SecretKey", null, CONFIG_PATH);
+                if (ocr_api_key_config != null && ocr_api_key_config.Trim().Length > 0 && ocr_secret_key_config != null && ocr_secret_key_config.Trim().Length > 0)
+                {
+                    ocr_api_key = ocr_api_key_config;
+                    ocr_secret_key = ocr_secret_key_config;
+                    Properties.Settings.Default.OCRApiKey = ocr_api_key_config;
+                    Properties.Settings.Default.OCRSecretKey = ocr_secret_key_config;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            InitBaiduYun(ocr_api_key, ocr_secret_key, false);
+
+            string translate_api_key = Properties.Settings.Default.TranslateApiKey;
+            string translate_secret_key = Properties.Settings.Default.TranslateSecretKey;
+            if ((translate_api_key == null || translate_api_key.Trim().Length <= 0) && (translate_secret_key == null || translate_secret_key.Trim().Length <= 0) && System.IO.File.Exists(CONFIG_PATH))
+            {
+                string translate_api_key_config = IniConfigUtils.GetValue("BaiduYunTranslate", "ApiKey", null, CONFIG_PATH);
+                string translate_secret_key_config = IniConfigUtils.GetValue("BaiduYunTranslate", "SecretKey", null, CONFIG_PATH);
+                if (translate_api_key_config != null && translate_api_key_config.Trim().Length > 0 && translate_secret_key_config != null && translate_secret_key_config.Trim().Length > 0)
+                {
+                    translate_api_key = translate_api_key_config;
+                    translate_secret_key = translate_secret_key_config;
+                    Properties.Settings.Default.TranslateApiKey = translate_api_key_config;
+                    Properties.Settings.Default.TranslateSecretKey = translate_secret_key_config;
+                    Properties.Settings.Default.Save();
+                }
+            }
+            BaiduTranslateUtils.clientId = translate_api_key;
+            BaiduTranslateUtils.clientSecret = translate_secret_key;
+
             var g = Graphics.FromHwnd(IntPtr.Zero);
             IntPtr desktop = g.GetHdc();
             mScreenWidth = System32DllHelper.GetDeviceCaps(desktop, (int)DeviceCap.DESKTOPHORZRES);
@@ -218,7 +270,7 @@ namespace 屏幕工具
 
         private void InitBaiduYun(string apiKey, string secretKey, bool isTip)
         {
-            if (apiKey == null || apiKey.Length <= 0 || secretKey == null || secretKey.Length <= 0)
+            if (apiKey == null || apiKey.Trim().Length <= 0 || secretKey == null || secretKey.Trim().Length <= 0)
             {
                 if (isTip)
                 {
@@ -302,6 +354,12 @@ namespace 屏幕工具
             ShowGifSicleTool();
         }
 
+        private void btn_text_paster_Click(object sender, EventArgs e)
+        {
+            FormTextPaster paster = new FormTextPaster();
+            paster.Show();
+        }
+
         private void btn_ocr_copy_Click(object sender, EventArgs e)
         {
             if (tabControl.SelectedIndex == 0)
@@ -380,6 +438,7 @@ namespace 屏幕工具
         //截图状态的判定
         private void ScreenShot(CatchType type)
         {
+            Form_catch form_catch = new Form_catch(type, is_copy_image_path);
             if (isScreenShot == false)
             {
                 if (type == CatchType.CATCH)
@@ -392,7 +451,30 @@ namespace 屏幕工具
                     {
                         this.Location = new System.Drawing.Point(mScreenWidth, mScreenHigth);
                     }
-                    PrScrnDllHelper.PrScrn();
+                    //PrScrnDllHelper.PrScrn();
+                    ////注册Catch窗体定义的事件委托
+                    //form_catch.SetICSEvent += new SetICS(SetisScreenShot);
+                    ////进入截图
+                    //form_catch.ShowDialog();
+                    int ret = PrScrnDllHelper.PrScrn();
+                    if (ret == 1 && is_copy_image_path)
+                    {
+                        Image image = Clipboard.GetImage();
+                        //bmp.Save(catchPicture, System.Drawing.Imaging.ImageFormat.Jpeg);
+                        string savePath = form_catch.getCatchPicturePath();
+                        try
+                        {
+                            image.Save(savePath, System.Drawing.Imaging.ImageFormat.Jpeg);
+                            //复制保存的文件路径到剪贴板
+                            StringCollection files = new StringCollection();
+                            files.Add(savePath);
+                            Clipboard.SetFileDropList(files);
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("请把程序安装在C盘以外的位置");
+                        }
+                    }
                     if (this.Visible)
                     {
                         this.Location = new System.Drawing.Point(mLastLocationX, mLastLocationY);
@@ -400,7 +482,6 @@ namespace 屏幕工具
                     isScreenShot = false;
                     return;
                 }
-                Form_catch form_catch = new Form_catch(type);
                 //注册Catch窗体定义的事件委托
                 form_catch.SetICSEvent += new SetICS(SetisScreenShot);
                 //进入截图
@@ -668,7 +749,8 @@ namespace 屏幕工具
             DialogResult result = baiduyun.ShowDialog();
             if (result == DialogResult.OK)
             {
-                InitBaiduYun(Properties.Settings.Default.OCRApiKey, Properties.Settings.Default.OCRSecretKey);
+                BaiduTranslateUtils.clientId = Properties.Settings.Default.TranslateApiKey;
+                BaiduTranslateUtils.clientSecret = Properties.Settings.Default.TranslateSecretKey;
             }
         }
 
@@ -680,6 +762,30 @@ namespace 屏幕工具
             {
                 UnregisterAllHotKey();
                 RegisterAllHotKey();
+            }
+        }
+
+        private void 复制图像内容到剪切板ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (is_copy_image_path)
+            {
+                is_copy_image_path = false;
+                Properties.Settings.Default.CopyImagePath = false;
+                Properties.Settings.Default.Save();
+                复制图像路径到剪切板ToolStripMenuItem.Image = Properties.Resources.选择框_未选;
+                复制图像内容到剪切板ToolStripMenuItem.Image = Properties.Resources.选择框_选中;
+            }
+        }
+
+        private void 复制图像路径到剪切板ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!is_copy_image_path)
+            {
+                is_copy_image_path = true;
+                Properties.Settings.Default.CopyImagePath = true;
+                Properties.Settings.Default.Save();
+                复制图像路径到剪切板ToolStripMenuItem.Image = Properties.Resources.选择框_选中;
+                复制图像内容到剪切板ToolStripMenuItem.Image = Properties.Resources.选择框_未选;
             }
         }
 

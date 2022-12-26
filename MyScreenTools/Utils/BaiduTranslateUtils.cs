@@ -17,9 +17,9 @@ namespace 屏幕工具
         public static String TOKEN = "24.adda70c11b9786206253ddb70affdc46.2592000.1493524354.282335-1234567";
 
         // 百度云中开通对应服务应用的 API Key 建议开通应用的时候多选服务
-        private static String clientId = Properties.Settings.Default.TranslateApiKey;
+        public static String clientId = Properties.Settings.Default.TranslateApiKey;
         // 百度云中开通对应服务应用的 Secret Key
-        private static String clientSecret = Properties.Settings.Default.TranslateSecretKey;
+        public static String clientSecret = Properties.Settings.Default.TranslateSecretKey;
 
         public static string GetAccessToken()
         {

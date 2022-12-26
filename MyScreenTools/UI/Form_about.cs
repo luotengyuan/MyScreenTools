@@ -30,5 +30,20 @@ namespace 屏幕工具
             tb_version_log.SelectionLength = 0;  //设置长度
             tb_version_log.ScrollToCaret();
         }
+
+        private void linkLabel1_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://blog.csdn.net/loutengyuan/article/details/125669369");
+        }
+
+        private void linkLabel2_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://github.com/luotengyuan/MyScreenTools");
+        }
+
+        private void linkLabel3_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://gitee.com/luotengyuan/MyScreenTools");
+        }
     }
 }

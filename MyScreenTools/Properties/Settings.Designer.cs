@@ -190,5 +190,17 @@ namespace 屏幕工具.Properties {
                 this["OcrExcelHotKey"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool CopyImagePath {
+            get {
+                return ((bool)(this["CopyImagePath"]));
+            }
+            set {
+                this["CopyImagePath"] = value;
+            }
+        }
     }
 }

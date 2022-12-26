@@ -50,8 +50,10 @@
             this.ClientSize = new System.Drawing.Size(697, 436);
             this.Controls.Add(this.picture_paste);
             this.Name = "Form_paste";
+            this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "贴图";
+            this.TopMost = true;
             ((System.ComponentModel.ISupportInitialize)(this.picture_paste)).EndInit();
             this.ResumeLayout(false);
 

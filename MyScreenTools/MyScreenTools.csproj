@@ -241,6 +241,10 @@
       <Project>{272d703b-b7a7-4993-8690-23390223d736}</Project>
       <Name>ScreenColorPicker</Name>
     </ProjectReference>
+    <ProjectReference Include="..\ScreenTextPaster\ScreenTextPaster.csproj">
+      <Project>{dc7a057b-8c57-45c8-b3e6-9f1bbf061bcc}</Project>
+      <Name>ScreenTextPaster</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScreenToGif\ScreenToGif.csproj">
       <Project>{51f5b263-0df8-46ae-b1bb-a4af0b12f69f}</Project>
       <Name>ScreenToGif</Name>

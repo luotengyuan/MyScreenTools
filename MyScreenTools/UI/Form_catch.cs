@@ -1,6 +1,7 @@
 ﻿using CommonLibrary;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -42,6 +43,8 @@ namespace 屏幕工具
         //绘制的截图矩形框
         private Rectangle rect;
 
+        private bool is_copy_image_path;
+
         public Rectangle Rect
         {
             get { return rect; }
@@ -53,11 +56,14 @@ namespace 屏幕工具
         // 截图类型
         private CatchType mCatchType;
         // 默认的图片保持路径
-        public string catchPicture = System.AppDomain.CurrentDomain.BaseDirectory + "\\catch.jpg";
-        public Form_catch(CatchType type)
+        private readonly string _pathTemp = Path.GetTempPath() + @"MyScreenTools\Catch\";
+        //public string catchPicture = System.AppDomain.CurrentDomain.BaseDirectory + "\\catch.jpg";
+        public string catchPicture = null;
+        public Form_catch(CatchType type, bool is_copy_image_path)
         {
             InitializeComponent();
             mCatchType = type;
+            this.is_copy_image_path = is_copy_image_path;
             //MessageBox.Show("" + System.IO.Directory.GetCurrentDirectory()
             //    + "\n" + System.AppDomain.CurrentDomain.BaseDirectory
             //    + "\n" + System.Diagnostics.Process.GetCurrentProcess().MainModule.FileName
@@ -403,6 +409,15 @@ namespace 屏幕工具
             return null;
         }
 
+        public string getCatchPicturePath()
+        {
+            if (!Directory.Exists(_pathTemp))
+            {
+                Directory.CreateDirectory(_pathTemp);
+            }
+            return String.Format("{0}catch_{1}.jpg", _pathTemp, DateTime.Now.ToString("yyyy-MM-dd_HH-mm-ss"));
+        }
+
         //储存图片
         private void SaveFile(Bitmap bmp, bool isDefaultFile)
         {
@@ -410,6 +425,7 @@ namespace 屏幕工具
             {
                 if (isDefaultFile)
                 {
+                    catchPicture = getCatchPicturePath();
                     bmp.Save(catchPicture, System.Drawing.Imaging.ImageFormat.Jpeg);
                 }
                 else
@@ -571,10 +587,20 @@ namespace 屏幕工具
             Bitmap bitmap = getCatchPictureBitmap();
             if (bitmap != null)
             {
-                //复制到剪贴板
-                Clipboard.SetImage(bitmap);
                 //保持到默认路径
                 SaveFile(bitmap, true);
+                if (is_copy_image_path)
+                {
+                    //复制保存的文件路径到剪贴板
+                    StringCollection files = new StringCollection();
+                    files.Add(catchPicture);
+                    Clipboard.SetFileDropList(files);
+                }
+                else
+                {
+                    //复制原始图像到剪贴板
+                    Clipboard.SetImage(bitmap);
+                }
                 this.DialogResult = DialogResult.OK;
                 this.Close();
             }

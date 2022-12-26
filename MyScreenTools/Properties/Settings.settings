@@ -44,5 +44,8 @@
     <Setting Name="OcrExcelHotKey" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">86</Value>
     </Setting>
+    <Setting Name="CopyImagePath" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
